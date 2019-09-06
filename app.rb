@@ -28,4 +28,17 @@ class CondaAPI < Sinatra::Base
       halt 404, "Product not found"
     end
   end
+
+  get %r{/packages/(.*)/(.*).json} do
+    content_type :json
+
+    channel = params[:captures].first
+    name = params[:captures].last
+    package = CONDA_REPO.package(channel, name)
+    if package
+      package.to_json
+    else
+      halt 404, "Product not found"
+    end
+  end
 end
