@@ -1,4 +1,4 @@
-Copyright (c) 2016 Andrew Nesbitt
+Copyright (c) 2019 Copyright Tidelift, Inc.
 
 MIT License
 
