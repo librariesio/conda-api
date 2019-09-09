@@ -14,10 +14,6 @@ gem "puma"
 gem "redis"
 gem "sinatra"
 
-group :development do
-  gem "capistrano"
-end
-
 group :test do
   gem "fakeredis", require: "fakeredis/rspec"
   gem "pry"
