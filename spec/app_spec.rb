@@ -17,10 +17,10 @@ describe CondaAPI do
 
     json = JSON.parse(last_response.body)
     expect(json).to eq [
-        "pkgs/main/sip",
-        "pkgs/main/six",
-        "pkgs/main/smart_open",
-        "pkgs/main/urllib3",
+      "pkgs/main/sip",
+      "pkgs/main/six",
+      "pkgs/main/smart_open",
+      "pkgs/main/urllib3",
     ]
   end
 end

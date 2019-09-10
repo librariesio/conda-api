@@ -27,7 +27,7 @@ RSpec.describe Conda do
           "pkgs/main/six",
           "pkgs/main/smart_open",
           "pkgs/main/urllib3",
-      ]
+        ]
       end
     end
   end
