@@ -4,18 +4,17 @@ require "sinatra/base"
 require "./conda"
 require "builder"
 
-redis = Redis.new(url: ENV["REDIS_SERVER"], driver: :hiredis)
-CONDA = Conda.new(redis)
-CONDA.update_packages
+# TODO: remove once feed.rb is working.
+Conda.instance.update_packages
 
 class CondaAPI < Sinatra::Base
   get "/" do
-    "Hello World! #{CONDA.package_names.length} \n"
+    "Hello World! #{Conda.instance.package_names.length} \n"
   end
 
   get "/packages" do
     content_type :json
-    CONDA.package_names.to_json
+    Conda.instance.package_names.to_json
   end
 
   get "/packages/:name" do
@@ -32,7 +31,7 @@ class CondaAPI < Sinatra::Base
   private
 
   def package_version(channel, name)
-    package = CONDA.package(channel, name)
+    package = Conda.instance.package(channel, name)
     if package
       package.to_json
     else

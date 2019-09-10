@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
-require "msgpack"
-require "json"
 require "httparty"
-require "net/http"
+require "json"
+require "msgpack"
+require "singleton"
 
 class Conda
+  include Singleton
+
   CHANNEL_PATH = File.dirname(__FILE__) + "/tmp/channels"
   CHANNELS = [
     # channel, domain, directory_path_to channeldata.json
@@ -13,8 +15,8 @@ class Conda
     # ["conda-forge", "conda.anaconda.org", "/conda-forge"],
   ].freeze
 
-  def initialize(redis)
-    @redis = redis
+  def initialize
+    @redis = Redis.new(url: ENV["REDIS_SERVER"], driver: :hiredis)
   end
 
   def package_names

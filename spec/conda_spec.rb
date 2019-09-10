@@ -2,7 +2,7 @@
 
 RSpec.describe Conda do
   describe "Conda" do
-    subject { described_class.new(Redis.new) }
+    subject { described_class.instance }
     before do
       allow(subject).to receive(:download_json).and_return(json_load_fixture("pkgs/main.json"))
     end
