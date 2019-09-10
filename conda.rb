@@ -58,6 +58,7 @@ class Conda
   private
 
   def download_json(channel, domain)
+    binding.pry
     url = "https://#{domain}/#{channel}/channeldata.json"
     HTTParty.get(url).parsed_response
   end
