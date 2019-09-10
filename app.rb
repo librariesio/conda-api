@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "sinatra/base"
-require "./conda"
+require_relative "conda"
 require "builder"
 
 class CondaAPI < Sinatra::Base
