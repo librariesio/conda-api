@@ -9,8 +9,8 @@ require './conda_repo'
 #                                                    host: URI.parse(redis_uri).host,
 #                                                    port: URI.parse(redis_uri).port))
 # TODO: do this in next PR
-#while(true) do
+# while(true) do
 #  new_entries = client.fetch.new_entries
 #  CocoapodsRepo.new(redis_uri).update_pods if new_entries
 #  sleep 30
-#end
+# end
