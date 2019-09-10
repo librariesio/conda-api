@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
 require "sinatra/base"
-require "./conda_repo"
+require "./conda"
 require "builder"
 
 redis = Redis.new(url: ENV["REDIS_SERVER"], driver: :hiredis)
-CONDA_REPO = CondaRepo.new(redis)
-CONDA_REPO.update_packages
+CONDA = Conda.new(redis)
+CONDA.update_packages
 
 class CondaAPI < Sinatra::Base
   get "/" do
-    "Hello World! #{CONDA_REPO.package_names.length} \n"
+    "Hello World! #{CONDA.package_names.length} \n"
   end
 
   get "/packages" do
     content_type :json
-    CONDA_REPO.package_names.to_json
+    CONDA.package_names.to_json
   end
 
   get "/packages/:name" do
@@ -32,7 +32,7 @@ class CondaAPI < Sinatra::Base
   private
 
   def package_version(channel, name)
-    package = CONDA_REPO.package(channel, name)
+    package = CONDA.package(channel, name)
     if package
       package.to_json
     else

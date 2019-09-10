@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe CondaRepo do
-  describe "CondaRepo" do
+RSpec.describe Conda do
+  describe "Conda" do
     subject { described_class.new(Redis.new) }
     before do
       allow(subject).to receive(:download_json).and_return(json_load_fixture("pkgs/main.json"))

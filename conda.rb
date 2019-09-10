@@ -5,7 +5,7 @@ require "json"
 require "httparty"
 require "net/http"
 
-class CondaRepo
+class Conda
   CHANNEL_PATH = File.dirname(__FILE__) + "/tmp/channels"
   CHANNELS = [
     # channel, domain, directory_path_to channeldata.json
