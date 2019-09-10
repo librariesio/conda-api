@@ -4,9 +4,6 @@ require "sinatra/base"
 require "./conda"
 require "builder"
 
-# TODO: remove once feed.rb is working.
-Conda.instance.update_packages
-
 class CondaAPI < Sinatra::Base
   get "/" do
     "Hello World! #{Conda.instance.package_names.length} \n"

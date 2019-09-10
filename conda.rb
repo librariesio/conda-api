@@ -16,7 +16,12 @@ class Conda
   ].freeze
 
   def initialize
-    @redis = Redis.new(url: ENV["REDIS_SERVER"], driver: :hiredis)
+    if ENV["RACK_ENV"] == "test"
+      @redis = MockRedis.new
+    else
+      @redis = Redis.new(url: ENV["REDIS_SERVER"], driver: :hiredis)
+      update_packages
+    end
   end
 
   def package_names
@@ -58,7 +63,6 @@ class Conda
   private
 
   def download_json(channel, domain)
-    binding.pry
     url = "https://#{domain}/#{channel}/channeldata.json"
     HTTParty.get(url).parsed_response
   end

@@ -22,10 +22,12 @@ RSpec.describe Conda do
       end
 
       it "shows a list of packages" do
-        expect(subject.package_names).to include "pkgs/main/urllib3"
-        expect(subject.package_names).to include "pkgs/main/smart_open"
-        expect(subject.package_names).to include "pkgs/main/six"
-        expect(subject.package_names).to include "pkgs/main/sip"
+        expect(subject.package_names).to eq [
+          "pkgs/main/sip",
+          "pkgs/main/six",
+          "pkgs/main/smart_open",
+          "pkgs/main/urllib3",
+      ]
       end
     end
   end

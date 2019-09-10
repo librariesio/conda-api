@@ -2,8 +2,7 @@
 
 require "rack/test"
 require "rspec"
-require "json"
-require "fakeredis"
+require "mock_redis"
 require "pry"
 
 require "./conda"

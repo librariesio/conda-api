@@ -15,7 +15,7 @@ gem "redis"
 gem "sinatra"
 
 group :test do
-  gem "fakeredis", require: "fakeredis/rspec"
+  gem "mock_redis"
   gem "pry"
   gem "rack-test"
   gem "rspec"
