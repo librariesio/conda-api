@@ -12,6 +12,7 @@ class Conda
   CHANNELS = [
     # channel, domain, directory_path_to channeldata.json
     ["pkgs/main", "repo.anaconda.com"],
+    # TODO: enable me when asked to.
     # ["conda-forge", "conda.anaconda.org", "/conda-forge"],
   ].freeze
 
@@ -25,7 +26,7 @@ class Conda
   end
 
   def package_names
-    @redis.smembers("package_names")
+    @redis.smembers("package_names").sort
   end
 
   def package(channel, name)
