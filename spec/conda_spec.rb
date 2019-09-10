@@ -9,7 +9,7 @@ RSpec.describe Conda do
 
     it "loads packages" do
       packages = subject.download_and_parse_packages
-      expect(packages["pkgs/main"].count).to be 58
+      expect(packages["pkgs/main"].count).to be 4
     end
 
     describe "with redis" do
