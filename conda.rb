@@ -31,7 +31,7 @@ class Conda
 
   def package(channel, name)
     pack = @redis.get("packages:#{channel}/#{name}")
-    return nil unless pack
+    return unless pack
 
     MessagePack.unpack(pack.force_encoding("ASCII-8BIT"))
   end
