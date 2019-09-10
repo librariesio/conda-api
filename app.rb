@@ -16,8 +16,7 @@ class CondaAPI < Sinatra::Base
 
   get "/packages/:name" do
     content_type :json
-    channel = "pkgs/main" # Default for now
-    package_version(channel, name)
+    package_version("pkgs/main", params[:name])
   end
 
   get %r{/packages/(?<channel>.*)/(?<name>.*)/?} do

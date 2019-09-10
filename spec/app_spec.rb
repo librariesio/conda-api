@@ -23,4 +23,18 @@ describe CondaAPI do
       "pkgs/main/urllib3",
     ]
   end
+
+  it "should get urllib3 both from channel and not" do
+    get "/packages/pkgs/main/urllib3"
+    expect(last_response).to be_ok
+
+    json = JSON.parse(last_response.body)
+    expect(json).to eq "1.25.3"
+
+    get "/packages/urllib3"
+    expect(last_response).to be_ok
+
+    json = JSON.parse(last_response.body)
+    expect(json).to eq "1.25.3"
+  end
 end
