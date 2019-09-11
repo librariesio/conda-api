@@ -8,7 +8,6 @@ require "singleton"
 class Conda
   include Singleton
 
-  CHANNEL_PATH = File.dirname(__FILE__) + "/tmp/channels"
   CHANNELS = [
     # channel, domain, directory_path_to channeldata.json
     ["pkgs/main", "repo.anaconda.com"],
