@@ -14,5 +14,5 @@ loop do
     puts "#{new_entries.length} new"
     Conda.instance.update_packages
   end
-  sleep 30
+  sleep 300
 end
