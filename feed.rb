@@ -5,5 +5,5 @@ require './conda'
 
 loop do
   Conda.instance.update_packages
-  sleep 300
+  sleep 900
 end
