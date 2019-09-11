@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-ruby "2.5.0"
+ruby "2.6.3"
 
 gem "builder"
-gem "feedtosis", git: "https://github.com/alown/feedtosis"
 gem "foreman"
 gem "hiredis"
 gem "httparty"
-gem "moneta"
 gem "msgpack"
 gem "puma"
 gem "redis"

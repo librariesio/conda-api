@@ -2,7 +2,7 @@
 
 describe CondaAPI do
   before do
-    allow(Conda.instance).to receive(:download_json).and_return(json_load_fixture("pkgs/main.json"))
+    allow(Conda.instance).to receive(:download_channeldata).and_return(json_load_fixture("pkgs/main.json"))
     Conda.instance.update_packages
   end
 
