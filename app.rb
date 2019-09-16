@@ -3,8 +3,6 @@
 require "sinatra/base"
 require_relative "conda"
 require "builder"
-require "pry"
-
 class CondaAPI < Sinatra::Base
   get "/" do
     "Hello World! #{Conda.instance.package_names.length} \n"
