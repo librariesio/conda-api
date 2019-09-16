@@ -47,8 +47,8 @@ class Conda
       @redis.sadd("package_names", packages.keys.map { |name| "#{channel}/#{name}" })
       packages.each do |name, package_info|
         version = package_info["version"]
-        key = "#{channel}/#{name}"
-        @redis.set("packages:#{key}", MessagePack.pack(version))
+        key = "packages:#{channel}/#{name}"
+        @redis.set(key, MessagePack.pack(package_info))
       end
     end
   end
