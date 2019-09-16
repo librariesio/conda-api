@@ -25,16 +25,16 @@ describe CondaAPI do
   end
 
   it "should get urllib3 both from channel and not" do
-    get "/packages/pkgs/main/urllib3"
+    get "/packages/pkgs%252Fmain/urllib3"
     expect(last_response).to be_ok
 
     json = JSON.parse(last_response.body)
 
     expected_full_response = {
-      "activate.d" => false, 
-      "binary_prefix" => false, 
-      "deactivate.d" => false, 
-      "description" => "urllib3 is a powerful, sanity-friendly HTTP client for Python. Much of the Python ecosystem already uses urllib3. urllib3 brings many critical features that are missing from the Python standard libraries, such as thread safety, connection pooling, client side ssl/tls verification, support for gzip and deflate encodings, HTTP and SOCKS proxy support, helpers for retrying requests and dealing with HTTP redirects.", 
+      "activate.d" => false,
+      "binary_prefix" => false,
+      "deactivate.d" => false,
+      "description" => "urllib3 is a powerful, sanity-friendly HTTP client for Python. Much of the Python ecosystem already uses urllib3. urllib3 brings many critical features that are missing from the Python standard libraries, such as thread safety, connection pooling, client side ssl/tls verification, support for gzip and deflate encodings, HTTP and SOCKS proxy support, helpers for retrying requests and dealing with HTTP redirects.",
       "dev_url" => "https://github.com/shazow/urllib3",
       "doc_source_url" => "https://github.com/shazow/urllib3/tree/master/docs",
       "doc_url" => "https://urllib3.readthedocs.io/",
@@ -53,9 +53,9 @@ describe CondaAPI do
       "source_url" => "https://pypi.io/packages/source/u/urllib3/urllib3-1.25.3.tar.gz",
       "subdirs" => ["linux-32", "linux-64", "linux-ppc64le", "osx-64", "win-32", "win-64"],
       "summary" => "HTTP library with thread-safe connection pooling, file post, and more.",
-      "tags" => nil, 
-      "text_prefix" => false, 
-      "timestamp" => 1559851824, 
+      "tags" => nil,
+      "text_prefix" => false,
+      "timestamp" => 1559851824,
       "version" => "1.25.3"
     }
 

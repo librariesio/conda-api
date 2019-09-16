@@ -3,6 +3,7 @@
 require "sinatra/base"
 require_relative "conda"
 require "builder"
+require "pry"
 
 class CondaAPI < Sinatra::Base
   get "/" do
@@ -19,9 +20,10 @@ class CondaAPI < Sinatra::Base
     package_version("pkgs/main", params[:name])
   end
 
-  get %r{/packages/(?<channel>.*)/(?<name>.*)/?} do
+  get "/packages/:channel/:name" do
+    channel = CGI.unescape(CGI.unescape(params[:channel]))
     content_type :json
-    package_version(params[:channel], params[:name])
+    package_version(channel, params[:name])
   end
 
   private
