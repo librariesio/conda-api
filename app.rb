@@ -19,7 +19,7 @@ class CondaAPI < Sinatra::Base
   end
 
   get "/packages/:channel/:name" do
-    channel = CGI.unescape(CGI.unescape(params[:channel]))
+    channel = CGI.unescape(CGI.unescape(params[:channel]))  # %252F -> %2F -> /
     content_type :json
     package_version(channel, params[:name])
   end
