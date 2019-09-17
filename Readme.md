@@ -36,3 +36,11 @@ The server should now be running port 9292. This can be verified by going to `ht
 Run the unit tests using `rspec` locally or within a built docker container `docker build -t librariesio/conda-api . && docker run -it -e PORT=9292 -p 9292:9292 librariesio/conda-api rspec`.
 
 
+### Getting the data locally
+
+Run this (looks similar to the feed.rb file), to put the current data from the web into your Redis
+
+```
+$ docker-compose build
+$ docker-compose run app ruby feed_once.rb
+```
