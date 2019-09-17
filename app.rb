@@ -2,7 +2,7 @@
 
 require "sinatra/base"
 require_relative "conda"
-require "builder"
+require_relative "app"
 
 class CondaAPI < Sinatra::Base
   get "/" do
