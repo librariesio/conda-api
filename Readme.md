@@ -41,8 +41,8 @@ Run the unit tests using `rspec` locally or within a built docker container `doc
 Run this (looks similar to the feed.rb file), to put the current data from the web into your Redis
 
 ```
-docker-compose build
-docker-compose run app irb
+$ docker-compose build
+$ docker-compose run app irb
 irb(main)> require 'bundler'
 irb(main)> Bundler.require
 irb(main)> require './conda'
