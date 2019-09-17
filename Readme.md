@@ -42,9 +42,5 @@ Run this (looks similar to the feed.rb file), to put the current data from the w
 
 ```
 $ docker-compose build
-$ docker-compose run app irb
-irb(main)> require 'bundler'
-irb(main)> Bundler.require
-irb(main)> require './conda'
-irb(main)> Conda.instance.update_packages
+$ docker-compose run app ruby feed_once.rb
 ```
