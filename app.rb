@@ -17,21 +17,16 @@ class CondaAPI < Sinatra::Base
 
   get "/package" do
     content_type :json
-    if request.query_string.empty?
+    unless params["name"]
       {"error" => "Please provide at least a package name ?name= parameter"}.to_json
     else
-      package_version(request.query_string)
+      package_version(params["channel"] || "pkgs/main", params["name"])
     end
   end
 
   private
 
-  def package_version(query_string)
-    # Parse the query string for channel and name
-    qs = CGI::parse(query_string)
-    channel = qs["channel"].first || "pkgs/main"
-    name = qs["name"].first || qs["package"].first
-
+  def package_version(channel, name)
     package = Conda.instance.package(channel, name)
     if package
       package.to_json

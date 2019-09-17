@@ -24,7 +24,7 @@ describe CondaAPI do
     ]
   end
 
-  it "should get urllib3 both from channel and not" do
+  it "should show error message" do
     get "/package"
     expect(last_response).to be_ok
     json = JSON.parse(last_response.body)
@@ -32,11 +32,6 @@ describe CondaAPI do
   end
 
   it "should get urllib3 both from channel and not" do
-    get "/package?channel=pkgs/main&name=urllib3"
-    expect(last_response).to be_ok
-
-    json = JSON.parse(last_response.body)
-
     expected_full_response = {
       "activate.d" => false,
       "binary_prefix" => false,
@@ -66,11 +61,13 @@ describe CondaAPI do
       "version" => "1.25.3"
     }
 
+    get "/package?channel=pkgs/main&name=urllib3"
+    expect(last_response).to be_ok
+    json = JSON.parse(last_response.body)
     expect(json).to eq expected_full_response
 
     get "/package?name=urllib3"
     expect(last_response).to be_ok
-
     json = JSON.parse(last_response.body)
     expect(json).to eq expected_full_response
   end
