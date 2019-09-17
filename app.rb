@@ -3,7 +3,6 @@
 require "sinatra/base"
 require_relative "conda"
 require "builder"
-require "cgi"
 
 class CondaAPI < Sinatra::Base
   get "/" do
