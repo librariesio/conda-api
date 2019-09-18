@@ -31,11 +31,6 @@ class Conda
     @redis.smembers("package_names").sort
   end
 
-  def packages
-    packages = {}
-    @redis.scan_each(match: "packages:*") {|key| packages[key.rpartition("/").last] = @redis.get(key)}
-  end
-
   def package(channel, name)
     pack = @redis.get("packages:#{channel}/#{name}")
     return unless pack
