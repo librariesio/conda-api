@@ -31,6 +31,11 @@ class Conda
     @redis.smembers("package_names").sort
   end
 
+  def packages
+    packages = {}
+    @redis.scan_each(match: "packages:*") {|key| packages[key.rpartition("/").last] = @redis.get(key)}
+  end
+
   def package(channel, name)
     pack = @redis.get("packages:#{channel}/#{name}")
     return unless pack
@@ -66,10 +71,30 @@ class Conda
     channels_with_packages
   end
 
+  def latest(count)
+    packages = @redis.scan_each(match: "packages:*").to_a.map do |key|
+      channel, name = channel_and_name_from_key(key)
+      package = package(channel, name)
+      next if package["timestamp"].nil?
+
+      {"name" => name, "channel" => channel, "timestamp" => package["timestamp"]}
+    end.compact
+
+    packages.sort_by{|p| p["timestamp"]}.reverse[0...count]
+  end
+
   private
 
   def download_channeldata(channel, domain)
     url = "https://#{domain}/#{channel}/channeldata.json"
     HTTParty.get(url).parsed_response
+  end
+
+  def channel_and_name_from_key(key)
+    channel_name = key.rpartition(":").last
+    channel = channel_name.rpartition("/").first
+    name = channel_name.rpartition("/").last
+
+    [channel, name]
   end
 end

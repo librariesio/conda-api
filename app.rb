@@ -23,6 +23,11 @@ class CondaAPI < Sinatra::Base
     end
   end
 
+  get '/feed.rss' do
+    @entries = Conda.instance.latest(25)
+    builder :rss
+  end
+
   private
 
   def package_version(channel, name)
