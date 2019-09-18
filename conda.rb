@@ -38,6 +38,18 @@ class Conda
     MessagePack.unpack(pack.force_encoding("ASCII-8BIT"))
   end
 
+  def latest(count)
+    packages = @redis.scan_each(match: "packages:*").to_a.map do |key|
+      channel, name = channel_and_name_from_key(key)
+      package = package(channel, name)
+      next if package["timestamp"].nil?
+
+      {"name" => name, "channel" => channel, "timestamp" => package["timestamp"]}
+    end.compact
+
+    packages.sort_by{|p| p["timestamp"]}.reverse[0...count]
+  end
+
   ###########
   # Setters # -> Things to set up the data
   ###########
@@ -66,18 +78,6 @@ class Conda
     channels_with_packages
   end
 
-  def latest(count)
-    packages = @redis.scan_each(match: "packages:*").to_a.map do |key|
-      channel, name = channel_and_name_from_key(key)
-      package = package(channel, name)
-      next if package["timestamp"].nil?
-
-      {"name" => name, "channel" => channel, "timestamp" => package["timestamp"]}
-    end.compact
-
-    packages.sort_by{|p| p["timestamp"]}.reverse[0...count]
-  end
-
   private
 
   def download_channeldata(channel, domain)
@@ -86,6 +86,7 @@ class Conda
   end
 
   def channel_and_name_from_key(key)
+    # Split apart the channel and name from the redis key `packages:channel/name`
     channel_name = key.rpartition(":").last
     channel = channel_name.rpartition("/").first
     name = channel_name.rpartition("/").last
