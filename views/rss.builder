@@ -7,11 +7,11 @@ xml.rss :version => "2.0" do
 
     @entries.each do |entry|
       xml.item do
-        xml.title entry["name"]
-        xml.link "https://conda.libraries.io/package?name=#{entry["name"]}"
-        xml.description "#{entry["name"]} updated on #{entry["timestamp"]}"
-        xml.channel entry["channel"]
-        xml.pubDate entry["timestamp"]
+        xml.title entry[:name]
+        xml.link "https://conda.libraries.io/package?name=#{entry[:name]}"
+        xml.description "#{entry[:name]} updated on #{entry[:timestamp]}"
+        xml.channel entry[:channel]
+        xml.pubDate entry[:timestamp]
       end
     end
   end

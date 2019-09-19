@@ -62,9 +62,9 @@ RSpec.describe Conda do
       it "gets latest X packages" do
         # We have 4 in fixture, so picked 3 so that one would NOT be there
         expect(subject.latest 3).to eq [
-          {"channel"=>"pkgs/main", "name"=>"smart_open", "timestamp"=>1559917931},
-          {"channel"=>"pkgs/main", "name"=>"urllib3", "timestamp"=>1559851824},
-          {"channel"=>"pkgs/main", "name"=>"six", "timestamp"=>1544543226}
+          {channel: "pkgs/main", name: "smart_open", timestamp: 1559917931},
+          {channel: "pkgs/main", name: "urllib3", timestamp: 1559851824},
+          {channel: "pkgs/main", name: "six", timestamp: 1544543226}
         ]
       end
     end

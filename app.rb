@@ -28,7 +28,7 @@ class CondaAPI < Sinatra::Base
   get '/feed.json' do
     content_type :json
 
-    Conda.instance.latest(NUM_RECENT_PACKAGES).map { |x| x["name"] }.to_json
+    Conda.instance.latest(NUM_RECENT_PACKAGES).map { |x| x[:name] }.to_json
   end
 
   get '/feed.rss' do

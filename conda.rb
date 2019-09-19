@@ -44,10 +44,10 @@ class Conda
       package = package(channel, name)
       next if package["timestamp"].nil?
 
-      {"name" => name, "channel" => channel, "timestamp" => package["timestamp"]}
+      {name: name, channel: channel, timestamp: package["timestamp"]}
     end.compact
 
-    packages.sort_by{|p| p["timestamp"]}.reverse[0...count]
+    packages.sort_by{|p| p[:timestamp]}.reverse[0...count]
   end
 
   ###########
