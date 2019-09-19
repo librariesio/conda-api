@@ -70,6 +70,7 @@ describe CondaAPI do
       "identifiers" => nil,
       "keywords" => nil,
       "license" => "MIT",
+      "name" => "urllib3",
       "post_link" => false,
       "pre_link" => false,
       "pre_unlink" => false,
