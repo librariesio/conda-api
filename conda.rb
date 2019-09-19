@@ -35,7 +35,7 @@ class Conda
     pack = @redis.get("packages:#{channel}/#{name}")
     return unless pack
 
-    MessagePack.unpack(pack.force_encoding("ASCII-8BIT"))
+    MessagePack.unpack(pack.force_encoding("ASCII-8BIT")).update({"name" => name})
   end
 
   def latest(count)
