@@ -24,6 +24,30 @@ describe CondaAPI do
     ]
   end
 
+  it "should get list of latestpackages in json" do
+    get "/feed.json"
+    expect(last_response).to be_ok
+
+    json = JSON.parse(last_response.body)
+    expect(json).to eq [
+      "smart_open",
+      "urllib3",
+      "six",
+      "sip",
+    ]
+  end
+
+  it "should get list of latestpackages in rss" do
+    get "/feed.rss"
+    expect(last_response).to be_ok
+    expect(last_response.content_type).to eq("application/rss+xml")
+
+    expect(last_response.body).to include("<title>smart_open")
+    expect(last_response.body).to include("<title>six")
+    expect(last_response.body).to include("<title>urllib3")
+    expect(last_response.body).to include("<title>sip")
+  end
+
   it "should show error message" do
     get "/package"
     expect(last_response).to be_ok

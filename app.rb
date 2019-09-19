@@ -5,6 +5,8 @@ require_relative "conda"
 require_relative "app"
 
 class CondaAPI < Sinatra::Base
+  NUM_RECENT_PACKAGES = 25
+
   get "/" do
     "Hello World! #{Conda.instance.package_names.length} \n"
   end
@@ -21,6 +23,19 @@ class CondaAPI < Sinatra::Base
     else
       package_version(params["channel"] || "pkgs/main", params["name"])
     end
+  end
+
+  get '/feed.json' do
+    content_type :json
+
+    Conda.instance.latest(NUM_RECENT_PACKAGES).map { |x| x[:name] }.to_json
+  end
+
+  get '/feed.rss' do
+    content_type :rss
+
+    @entries = Conda.instance.latest(NUM_RECENT_PACKAGES)
+    builder :rss
   end
 
   private
