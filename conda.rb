@@ -87,9 +87,7 @@ class Conda
 
   def channel_and_name_from_key(key)
     # Split apart the channel and name from the redis key `packages:channel/name`
-    channel_name = key.rpartition(":").last.rpartition("/")
-    channel = channel_name.first
-    name = channel_name.last
+    channel, _, name = key.rpartition(":").last.rpartition("/")
 
     [channel, name]
   end
