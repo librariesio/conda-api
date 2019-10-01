@@ -5,7 +5,7 @@ require_relative "conda"
 require_relative "app"
 
 class CondaAPI < Sinatra::Base
-  NUM_RECENT_PACKAGES = 25
+  NUM_RECENT_PACKAGES = 300
 
   get "/" do
     "Hello World! #{Conda.instance.package_names.length} \n"
