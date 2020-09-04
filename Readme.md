@@ -10,18 +10,15 @@ A small service to make it easier for [Libraries.io](https://libraries.io) to re
 
 ## Extras
 
-- Watch https://github.com/Conda/Specs/commits/master.atom for updates
-- RSS feed of new/updated packages for https://github.com/librariesio/dispatcher to track
+- Watch anacoda repos for updates
 - Tell Libraries about removed versions/packages
 
 ## Development
 
 ### Requirements
-* ruby 2.6.3
+* ruby 2.6.6
   * Installing via [RVM](http://rvm.io/) or [rbenv](https://github.com/rbenv/rbenv) is recommended
 * redis
-  * Ubuntu Linux: `sudo apt-get install redis-server`
-  * OS X `brew install redis` `brew services start redis`
 
 ### Local Development
 
@@ -34,13 +31,3 @@ The server should now be running port 9292. This can be verified by going to `ht
 ### Tests
 
 Run the unit tests using `rspec` locally or within a built docker container `docker build -t librariesio/conda-api . && docker run -it -e PORT=9292 -p 9292:9292 librariesio/conda-api rspec`.
-
-
-### Getting the data locally
-
-Run this (looks similar to the feed.rb file), to put the current data from the web into your Redis
-
-```
-$ docker-compose build
-$ docker-compose run app ruby feed_once.rb
-```

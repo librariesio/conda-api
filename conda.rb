@@ -2,92 +2,52 @@
 
 require "httparty"
 require "json"
-require "msgpack"
 require "singleton"
 
 class Conda
   include Singleton
 
-  CHANNELS = [
-    # channel, domain, directory_path_to channeldata.json
-    ["pkgs/main", "repo.anaconda.com"],
-    # TODO: enable me when asked to.
-    # ["conda-forge", "conda.anaconda.org", "/conda-forge"],
-  ].freeze
+  attr_reader :main
 
   def initialize
-    @redis = if ENV["RACK_ENV"] == "test"
-               MockRedis.new
-             else
-               Redis.new(url: ENV["REDIS_SERVER"], driver: :hiredis)
-             end
+    @main = Conda::Channel.new("pkgs/main", "repo.anaconda.com", "channeldata.json")
   end
 
-  ###########
-  # Getters # -> Used for Api Calls
-  ###########
+  class Channel
+    ARCHES = %w[linux-64 osx-64 win-64 noarch].freeze
 
-  def package_names
-    @redis.smembers("package_names").sort
-  end
+    attr_reader :timestamp, :packages
 
-  def package(channel, name)
-    pack = @redis.get("packages:#{channel}/#{name}")
-    return unless pack
-
-    MessagePack.unpack(pack.force_encoding("ASCII-8BIT")).update({ "name" => name })
-  end
-
-  def latest(count)
-    packages = @redis.scan_each(match: "packages:*").to_a.map do |key|
-      channel, name = channel_and_name_from_key(key)
-      package = package(channel, name)
-      next if package["timestamp"].nil?
-
-      { name: name, channel: channel, timestamp: package["timestamp"] }
-    end.compact
-
-    packages.sort_by { |p| p[:timestamp] }.reverse[0...count]
-  end
-
-  ###########
-  # Setters # -> Things to set up the data
-  ###########
-
-  def update_packages
-    download_and_parse_packages.each do |channel, packages|
-      @redis.sadd("package_names", packages.keys.map { |name| "#{channel}/#{name}" })
-      packages.each do |name, package_info|
-        key = "packages:#{channel}/#{name}"
-        @redis.set(key, MessagePack.pack(package_info))
-      end
-    end
-  end
-
-  def download_and_parse_packages
-    channels_with_packages = {}
-    CHANNELS.each do |channel, domain|
-      channel_packages = download_channeldata(channel, domain)["packages"]
-      channels_with_packages[channel] ||= {}
-      channel_packages.each do |package_name, package|
-        channels_with_packages[channel][package_name] = package
-      end
+    def initialize(channel, domain, path)
+      @channel = channel
+      @domain = domain
+      @path = path
+      @timestamp = Time.now
+      @mutex = Mutex.new
+      reload
     end
 
-    channels_with_packages
-  end
+    def package_names
+      @packages.keys
+    end
 
-  private
+    def reload
+      @mutex.synchronize { @packages = retrieve_packages }
+      @timestamp = Time.now
+    end
 
-  def download_channeldata(channel, domain)
-    url = "https://#{domain}/#{channel}/channeldata.json"
-    HTTParty.get(url).parsed_response
-  end
+    private
 
-  def channel_and_name_from_key(key)
-    # Split apart the channel and name from the redis key `packages:channel/name`
-    channel, _, name = key.rpartition(":").last.rpartition("/")
-
-    [channel, name]
+    def retrieve_packages
+      packs = Hash.new { |hash, key| hash[key] = [] }
+      ARCHES.each do |arch|
+        blob = HTTParty.get("https://#{@domain}/#{@channel}/#{arch}/repodata.json")["packages"]
+        blob.each_key do |key|
+          package = blob[key]
+          packs["#{@channel}/#{package["name"]}"] << { version: package["version"], license: package["license"], timestamp: package["timestamp"], arch: arch }
+        end
+      end
+      packs
+    end
   end
 end
