@@ -18,20 +18,20 @@ class CondaAPI < Sinatra::Base
 
   get "/package" do
     content_type :json
-    unless params["name"]
-      {"error" => "Please provide at least a package name ?name= parameter"}.to_json
-    else
+    if params["name"]
       package_version(params["channel"] || "pkgs/main", params["name"])
+    else
+      { "error" => "Please provide at least a package name ?name= parameter" }.to_json
     end
   end
 
-  get '/feed.json' do
+  get "/feed.json" do
     content_type :json
 
     Conda.instance.latest(NUM_RECENT_PACKAGES).map { |x| x[:name] }.to_json
   end
 
-  get '/feed.rss' do
+  get "/feed.rss" do
     content_type :rss
 
     @entries = Conda.instance.latest(NUM_RECENT_PACKAGES)

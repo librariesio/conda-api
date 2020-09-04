@@ -40,12 +40,12 @@ RSpec.describe Conda do
           "run_exports" => {},
           "source_git_url" => nil,
           "source_url" => "https://pypi.io/packages/source/u/urllib3/urllib3-1.25.3.tar.gz",
-          "subdirs" => ["linux-32", "linux-64", "linux-ppc64le", "osx-64", "win-32", "win-64"],
+          "subdirs" => %w[linux-32 linux-64 linux-ppc64le osx-64 win-32 win-64],
           "summary" => "HTTP library with thread-safe connection pooling, file post, and more.",
           "tags" => nil,
           "text_prefix" => false,
-          "timestamp" => 1559851824,
-          "version" => "1.25.3"
+          "timestamp" => 1_559_851_824,
+          "version" => "1.25.3",
         }
 
         expect(subject.package("pkgs/main", "urllib3")).to eq expected_full_response
@@ -62,10 +62,10 @@ RSpec.describe Conda do
 
       it "gets latest X packages" do
         # We have 4 in fixture, so picked 3 so that one would NOT be there
-        expect(subject.latest 3).to eq [
-          {channel: "pkgs/main", name: "smart_open", timestamp: 1559917931},
-          {channel: "pkgs/main", name: "urllib3", timestamp: 1559851824},
-          {channel: "pkgs/main", name: "six", timestamp: 1544543226}
+        expect(subject.latest(3)).to eq [
+          {channel: "pkgs/main", name: "smart_open", timestamp: 1_559_917_931},
+          {channel: "pkgs/main", name: "urllib3", timestamp: 1_559_851_824},
+          {channel: "pkgs/main", name: "six", timestamp: 1_544_543_226},
         ]
       end
     end

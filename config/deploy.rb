@@ -1,4 +1,6 @@
-lock '3.11.0'
+# frozen_string_literal: true
 
-set :application, 'conda_api'
-set :repo_url, 'git@github.com:librariesio/conda-api.git'
+lock "3.11.0"
+
+set :application, "conda_api"
+set :repo_url, "git@github.com:librariesio/conda-api.git"

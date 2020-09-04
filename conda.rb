@@ -16,11 +16,11 @@ class Conda
   ].freeze
 
   def initialize
-    if ENV["RACK_ENV"] == "test"
-      @redis = MockRedis.new
-    else
-      @redis = Redis.new(url: ENV["REDIS_SERVER"], driver: :hiredis)
-    end
+    @redis = if ENV["RACK_ENV"] == "test"
+               MockRedis.new
+             else
+               Redis.new(url: ENV["REDIS_SERVER"], driver: :hiredis)
+             end
   end
 
   ###########
@@ -35,7 +35,7 @@ class Conda
     pack = @redis.get("packages:#{channel}/#{name}")
     return unless pack
 
-    MessagePack.unpack(pack.force_encoding("ASCII-8BIT")).update({"name" => name})
+    MessagePack.unpack(pack.force_encoding("ASCII-8BIT")).update({ "name" => name })
   end
 
   def latest(count)
@@ -44,10 +44,10 @@ class Conda
       package = package(channel, name)
       next if package["timestamp"].nil?
 
-      {name: name, channel: channel, timestamp: package["timestamp"]}
+      { name: name, channel: channel, timestamp: package["timestamp"] }
     end.compact
 
-    packages.sort_by{|p| p[:timestamp]}.reverse[0...count]
+    packages.sort_by { |p| p[:timestamp] }.reverse[0...count]
   end
 
   ###########
@@ -58,7 +58,6 @@ class Conda
     download_and_parse_packages.each do |channel, packages|
       @redis.sadd("package_names", packages.keys.map { |name| "#{channel}/#{name}" })
       packages.each do |name, package_info|
-        version = package_info["version"]
         key = "packages:#{channel}/#{name}"
         @redis.set(key, MessagePack.pack(package_info))
       end

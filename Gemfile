@@ -14,7 +14,11 @@ gem "sinatra"
 
 group :test do
   gem "mock_redis"
-  gem "pry"
   gem "rack-test"
   gem "rspec"
+end
+
+group :development do
+  gem "pry"
+  gem "rubocop"
 end
