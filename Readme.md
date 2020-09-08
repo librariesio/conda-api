@@ -10,7 +10,7 @@ A small service to make it easier for [Libraries.io](https://libraries.io) to re
 
 ## Extras
 
-- Watch anacoda repos for updates
+- Watch anaconda repos for updates
 - Tell Libraries about removed versions/packages
 
 ## Development
