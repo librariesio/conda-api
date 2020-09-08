@@ -4,11 +4,12 @@ source "https://rubygems.org"
 ruby "2.6.6"
 
 gem "builder"
+gem "concurrent-ruby"
 gem "foreman"
 gem "httparty"
 gem "puma"
-gem "sinatra"
 gem "rufus-scheduler"
+gem "sinatra"
 
 group :test do
   gem "rack-test"

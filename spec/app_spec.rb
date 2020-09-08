@@ -17,6 +17,8 @@ describe CondaAPI do
     get "/packages"
     expect(last_response).to be_ok
     json = JSON.parse(last_response.body)
+    expect(json.keys.length).to eq 1877
+    expect(json.keys[12]).to eq "absl-py"
   end
 
   it "should 404 on missing package" do
