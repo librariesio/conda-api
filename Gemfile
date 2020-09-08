@@ -1,19 +1,17 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-ruby "2.6.3"
+ruby "2.6.6"
 
 gem "builder"
+gem "concurrent-ruby"
 gem "foreman"
-gem "hiredis"
 gem "httparty"
-gem "msgpack"
 gem "puma"
-gem "redis"
+gem "rufus-scheduler"
 gem "sinatra"
 
 group :test do
-  gem "mock_redis"
   gem "rack-test"
   gem "rspec"
 end

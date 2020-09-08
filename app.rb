@@ -3,49 +3,32 @@
 require "sinatra/base"
 require_relative "conda"
 require_relative "app"
+require "rufus-scheduler"
 
 class CondaAPI < Sinatra::Base
-  NUM_RECENT_PACKAGES = 300
+  scheduler = Rufus::Scheduler.new
 
   get "/" do
-    "Hello World! #{Conda.instance.package_names.length} \n"
+    "Last updated at #{Conda.instance.main.timestamp} \n"
   end
 
   get "/packages" do
     content_type :json
-    Conda.instance.package_names.to_json
+    Conda.instance.main.packages.to_json
   end
 
-  get "/package" do
+  get "/package/:name" do
     content_type :json
-    if params["name"]
-      package_version(params["channel"] || "pkgs/main", params["name"])
+    if params["name"] && Conda.instance.main.packages.key?(params["name"])
+      Conda.instance.main.packages[params["name"]].to_json
     else
-      { "error" => "Please provide at least a package name ?name= parameter" }.to_json
+      raise Sinatra::NotFound
     end
   end
 
-  get "/feed.json" do
-    content_type :json
-
-    Conda.instance.latest(NUM_RECENT_PACKAGES).map { |x| x[:name] }.to_json
-  end
-
-  get "/feed.rss" do
-    content_type :rss
-
-    @entries = Conda.instance.latest(NUM_RECENT_PACKAGES)
-    builder :rss
-  end
-
-  private
-
-  def package_version(channel, name)
-    package = Conda.instance.package(channel, name)
-    if package
-      package.to_json
-    else
-      halt 404, "Product not found"
-    end
+  scheduler.every "1h" do
+    puts "Reloading packages..."
+    Conda.instance.main.reload
+    puts "Reload finished"
   end
 end

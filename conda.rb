@@ -2,92 +2,87 @@
 
 require "httparty"
 require "json"
-require "msgpack"
 require "singleton"
 
 class Conda
   include Singleton
 
-  CHANNELS = [
-    # channel, domain, directory_path_to channeldata.json
-    ["pkgs/main", "repo.anaconda.com"],
-    # TODO: enable me when asked to.
-    # ["conda-forge", "conda.anaconda.org", "/conda-forge"],
-  ].freeze
+  attr_reader :main
 
   def initialize
-    @redis = if ENV["RACK_ENV"] == "test"
-               MockRedis.new
-             else
-               Redis.new(url: ENV["REDIS_SERVER"], driver: :hiredis)
-             end
+    @main = Conda::Channel.new("pkgs/main", "repo.anaconda.com")
   end
 
-  ###########
-  # Getters # -> Used for Api Calls
-  ###########
+  class Channel
+    ARCHES = %w[linux-64 osx-64 win-64 noarch].freeze
 
-  def package_names
-    @redis.smembers("package_names").sort
-  end
+    attr_reader :timestamp
 
-  def package(channel, name)
-    pack = @redis.get("packages:#{channel}/#{name}")
-    return unless pack
-
-    MessagePack.unpack(pack.force_encoding("ASCII-8BIT")).update({ "name" => name })
-  end
-
-  def latest(count)
-    packages = @redis.scan_each(match: "packages:*").to_a.map do |key|
-      channel, name = channel_and_name_from_key(key)
-      package = package(channel, name)
-      next if package["timestamp"].nil?
-
-      { name: name, channel: channel, timestamp: package["timestamp"] }
-    end.compact
-
-    packages.sort_by { |p| p[:timestamp] }.reverse[0...count]
-  end
-
-  ###########
-  # Setters # -> Things to set up the data
-  ###########
-
-  def update_packages
-    download_and_parse_packages.each do |channel, packages|
-      @redis.sadd("package_names", packages.keys.map { |name| "#{channel}/#{name}" })
-      packages.each do |name, package_info|
-        key = "packages:#{channel}/#{name}"
-        @redis.set(key, MessagePack.pack(package_info))
-      end
-    end
-  end
-
-  def download_and_parse_packages
-    channels_with_packages = {}
-    CHANNELS.each do |channel, domain|
-      channel_packages = download_channeldata(channel, domain)["packages"]
-      channels_with_packages[channel] ||= {}
-      channel_packages.each do |package_name, package|
-        channels_with_packages[channel][package_name] = package
-      end
+    def initialize(channel, domain)
+      @channel = channel
+      @domain = domain
+      @timestamp = Time.now
+      @lock = Concurrent::ReadWriteLock.new
+      reload
     end
 
-    channels_with_packages
-  end
+    def reload
+      new_packages = retrieve_packages
+      @lock.with_write_lock { @packages = new_packages }
+      @timestamp = Time.now
+    end
 
-  private
+    def packages
+      @lock.with_read_lock { @packages }
+    end
 
-  def download_channeldata(channel, domain)
-    url = "https://#{domain}/#{channel}/channeldata.json"
-    HTTParty.get(url).parsed_response
-  end
+    private
 
-  def channel_and_name_from_key(key)
-    # Split apart the channel and name from the redis key `packages:channel/name`
-    channel, _, name = key.rpartition(":").last.rpartition("/")
+    def retrieve_packages
+      packages = {}
+      channeldata = HTTParty.get("https://#{@domain}/#{@channel}/channeldata.json")["packages"]
+      ARCHES.each do |arch|
+        blob = HTTParty.get("https://#{@domain}/#{@channel}/#{arch}/repodata.json")["packages"]
+        blob.each_key do |key|
+          version = blob[key]
+          package_name = version["name"]
 
-    [channel, name]
+          unless packages.key?(package_name)
+            package_data = channeldata[package_name]
+            packages[package_name] = base_package(package_data, package_name)
+          end
+
+          packages[package_name][:versions] << release_version(version)
+        end
+      end
+      remove_duplicate_versions(packages)
+    end
+
+    def base_package(package_data, package_name)
+      {
+        versions: [],
+        repository_url: package_data["dev_url"],
+        homepage: package_data["home"],
+        licenses: package_data["license"],
+        description: package_data["description"],
+        name: package_name,
+      }
+    end
+
+    def release_version(package_version)
+      {
+        number: package_version["version"],
+        original_license: package_version["license"],
+        published_at: package_version["timestamp"].nil? ? nil : Time.at(package_version["timestamp"] / 1000),
+        dependencies: package_version["depends"],
+      }
+    end
+
+    def remove_duplicate_versions(packages)
+      packages.each_value do |value|
+        value[:versions] = value[:versions].uniq { |vers| vers[:number] }
+      end
+      packages
+    end
   end
 end
