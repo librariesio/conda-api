@@ -1,3 +1,4 @@
+# coding: utf-8
 # frozen_string_literal: true
 
 require "httparty"
@@ -10,7 +11,7 @@ class Conda
   attr_reader :main
 
   def initialize
-    @main = Conda::Channel.new("pkgs/main", "repo.anaconda.com", "channeldata.json")
+    @main = Conda::Channel.new("pkgs/main", "repo.anaconda.com")
   end
 
   class Channel
@@ -18,17 +19,12 @@ class Conda
 
     attr_reader :timestamp, :packages
 
-    def initialize(channel, domain, path)
+    def initialize(channel, domain)
       @channel = channel
       @domain = domain
-      @path = path
       @timestamp = Time.now
       @mutex = Mutex.new
       reload
-    end
-
-    def package_names
-      @packages.keys
     end
 
     def reload
@@ -39,15 +35,49 @@ class Conda
     private
 
     def retrieve_packages
-      packs = Hash.new { |hash, key| hash[key] = [] }
+      packages = {}
+      channeldata = HTTParty.get("https://#{@domain}/#{@channel}/channeldata.json")["packages"]
       ARCHES.each do |arch|
         blob = HTTParty.get("https://#{@domain}/#{@channel}/#{arch}/repodata.json")["packages"]
         blob.each_key do |key|
-          package = blob[key]
-          packs["#{@channel}/#{package["name"]}"] << { version: package["version"], license: package["license"], timestamp: package["timestamp"], arch: arch }
+          package_name = package["name"]
+
+          unless packages.has_key?(package_name)
+            package_data = channeldata[package_name]
+            packages[package_name] = base_package(package_data, package_name)
+          end
+
+          packages[package_name][:versions] << release_version(blob[key])
         end
       end
-      packs
+      remove_duplicate_versions(packages)
+    end
+
+    def base_package(package_data, package_name)
+      {
+        versions: [],
+        repository_url: package_data["dev_url"],
+        homepage: package_data["home"],
+        licenses: package_data["license"],
+        description: package_data["description"],
+        name: package_name
+      }
+    end
+
+    def release_version(package_version)
+      {
+        number: package["version"],
+        original_license: package["license"],
+        published_at: package["timestamp"].nil? ? nil : Time.at(package["timestamp"] / 1000),
+        dependencies: package["depends"]
+      }
+    end
+
+    def remove_duplicate_versions(packages)
+      packages.values.each do |value|
+        value[:versions] = value[:versions].uniq { |vers| vers[:number] }
+      end
+      packages
     end
   end
 end

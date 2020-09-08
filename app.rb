@@ -14,8 +14,7 @@ class CondaAPI < Sinatra::Base
 
   get "/packages" do
     content_type :json
-    binding.pry
-    Conda.instance.main.package_names.to_json
+    Conda.instance.main.packages.to_json
   end
 
   get "/package/:name" do
