@@ -29,11 +29,11 @@ describe CondaAPI do
     expect(last_response).to be_ok
 
     json = JSON.parse(last_response.body)
-    expect(json).to eq [
-      "smart_open",
-      "urllib3",
-      "six",
-      "sip",
+    expect(json).to eq %w[
+      smart_open
+      urllib3
+      six
+      sip
     ]
   end
 
@@ -78,12 +78,12 @@ describe CondaAPI do
       "run_exports" => {},
       "source_git_url" => nil,
       "source_url" => "https://pypi.io/packages/source/u/urllib3/urllib3-1.25.3.tar.gz",
-      "subdirs" => ["linux-32", "linux-64", "linux-ppc64le", "osx-64", "win-32", "win-64"],
+      "subdirs" => %w[linux-32 linux-64 linux-ppc64le osx-64 win-32 win-64],
       "summary" => "HTTP library with thread-safe connection pooling, file post, and more.",
       "tags" => nil,
       "text_prefix" => false,
-      "timestamp" => 1559851824,
-      "version" => "1.25.3"
+      "timestamp" => 1_559_851_824,
+      "version" => "1.25.3",
     }
 
     get "/package?channel=pkgs/main&name=urllib3"
