@@ -1,4 +1,4 @@
-Copyright (c) 2019 Copyright Tidelift, Inc.
+Copyright (c) 2020 Copyright Tidelift, Inc.
 
 MIT License
 
