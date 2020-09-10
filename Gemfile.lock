@@ -76,6 +76,8 @@ GEM
     tilt (2.0.8)
     tzinfo (2.0.2)
       concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2020.1)
+      tzinfo (>= 1.0.0)
     unicode-display_width (1.7.0)
 
 PLATFORMS
@@ -93,6 +95,7 @@ DEPENDENCIES
   rubocop
   rufus-scheduler
   sinatra
+  tzinfo-data (~> 1.2020)
 
 RUBY VERSION
    ruby 2.6.6p146

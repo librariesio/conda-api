@@ -20,3 +20,5 @@ group :development do
   gem "pry"
   gem "rubocop"
 end
+
+gem "tzinfo-data", "~> 1.2020"

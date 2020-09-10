@@ -8,4 +8,4 @@ gcloud --quiet container images describe ${TAGGED_IMAGE} || { status=$?; echo "C
 
 gcloud --quiet container images add-tag ${TAGGED_IMAGE} gcr.io/${GOOGLE_PROJECT}/conda-api:latest
 
-kubectl set image deployment/conda-service conda-service=${TAGGED_IMAGE}
+kubectl set image deployment/conda-service conda-api-container=${TAGGED_IMAGE}
