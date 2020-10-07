@@ -14,21 +14,30 @@ class CondaAPI < Sinatra::Base
 
   get "/packages" do
     content_type :json
-    Conda.instance.main.packages.to_json
+    Conda.instance.all_packages.to_json
   end
 
   get "/package/:name" do
     content_type :json
-    if params["name"] && Conda.instance.main.packages.key?(params["name"])
-      Conda.instance.main.packages[params["name"]].to_json
-    else
-      raise Sinatra::NotFound
-    end
+    package = Conda.instance.find_package(params["name"])
+    raise Sinatra::NotFound if package.nil?
+
+    package.to_json
+  end
+
+  get "/:channel/" do
+    content_type :json
+    Conda.instance.packages(params["channel"]).to_json
+  end
+
+  get "/:channel/:name" do
+    content_type :json
+    Conda.instance.package(params["channel"], params["name"]).to_json
   end
 
   scheduler.every "1h" do
     puts "Reloading packages..."
-    Conda.instance.main.reload
+    Conda.instance.reload_all
     puts "Reload finished"
   end
 end

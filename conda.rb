@@ -7,14 +7,50 @@ require "singleton"
 class Conda
   include Singleton
 
-  attr_reader :main
-
   def initialize
-    @main = Conda::Channel.new("pkgs/main", "repo.anaconda.com")
+    @channels = {
+      "main" => Conda::Channel.new("main", "repo.anaconda.com/pkgs"),
+      "conda-forge" => Conda::Channel.new("conda-forge", "conda.anaconda.org"),
+    }
+  end
+
+  def packages(channel)
+    raise Sinatra::NotFound unless @channels.key?(channel)
+
+    @channels[channel].packages
+  end
+
+  def all_packages
+    all_packages = {}
+    @channels.each_value do |channel|
+      channel.only_one_version_packages.each do |package_name, package|
+        if all_packages.key?(package_name)
+          all_packages[package_name][:versions] = all_packages[package_name][:versions] + package[:versions]
+        else
+          all_packages[package_name] = package
+        end
+      end
+    end
+    all_packages
+  end
+
+  def package(channel, name)
+    packs = packages(channel)
+    raise Sinatra::NotFound unless packs.key?(name)
+
+    packs[name]
+  end
+
+  def find_package(name)
+    @channels.values.find { |channel| channel.packages.key?(name) }&.packages&.dig(name)
+  end
+
+  def reload_all
+    @channels.each_value(&:reload)
   end
 
   class Channel
-    ARCHES = %w[linux-64 osx-64 win-64 noarch].freeze
+    ARCHES = %w[linux-32 linux-64 linux-aarch64 linux-armv6l linux-armv7l linux-ppc64le osx-64 win-64 win-32 noarch zos-z].freeze
 
     attr_reader :timestamp
 
@@ -36,6 +72,10 @@ class Conda
       @lock.with_read_lock { @packages }
     end
 
+    def only_one_version_packages
+      @lock.with_read_lock { remove_duplicate_versions(@packages) }
+    end
+
     private
 
     def retrieve_packages
@@ -52,10 +92,10 @@ class Conda
             packages[package_name] = base_package(package_data, package_name)
           end
 
-          packages[package_name][:versions] << release_version(version)
+          packages[package_name][:versions] << release_version(key, version)
         end
       end
-      remove_duplicate_versions(packages)
+      packages
     end
 
     def base_package(package_data, package_name)
@@ -69,12 +109,16 @@ class Conda
       }
     end
 
-    def release_version(package_version)
+    def release_version(artifact, package_version)
       {
+        artifact: artifact,
+        download_url: "https://#{@domain}/#{@channel}/#{package_version['subdir']}/#{artifact}",
         number: package_version["version"],
         original_license: package_version["license"],
         published_at: package_version["timestamp"].nil? ? nil : Time.at(package_version["timestamp"] / 1000),
         dependencies: package_version["depends"],
+        arch: package_version["subdir"],
+        channel: @channel,
       }
     end
 
