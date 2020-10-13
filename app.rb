@@ -19,10 +19,7 @@ class CondaAPI < Sinatra::Base
 
   get "/package/:name" do
     content_type :json
-    package = Conda.instance.find_package(params["name"])
-    raise Sinatra::NotFound if package.nil?
-
-    package.to_json
+    Conda.instance.find_package(params["name"]).to_json
   end
 
   get "/:channel/" do

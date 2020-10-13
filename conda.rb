@@ -42,7 +42,9 @@ class Conda
   end
 
   def find_package(name)
-    @channels.values.find { |channel| channel.packages.key?(name) }&.packages&.dig(name)
+    package = @channels.values.find { |channel| channel.packages.key?(name) }&.packages&.dig(name)
+    raise Sinatra::NotFound if package.nil?
+    package
   end
 
   def reload_all
@@ -55,7 +57,7 @@ class Conda
     attr_reader :timestamp
 
     def initialize(channel, domain)
-      @channel = channel
+      @channel_name = channel
       @domain = domain
       @timestamp = Time.now
       @lock = Concurrent::ReadWriteLock.new
@@ -80,9 +82,9 @@ class Conda
 
     def retrieve_packages
       packages = {}
-      channeldata = HTTParty.get("https://#{@domain}/#{@channel}/channeldata.json")["packages"]
+      channeldata = HTTParty.get("https://#{@domain}/#{@channel_name}/channeldata.json")["packages"]
       ARCHES.each do |arch|
-        blob = HTTParty.get("https://#{@domain}/#{@channel}/#{arch}/repodata.json")["packages"]
+        blob = HTTParty.get("https://#{@domain}/#{@channel_name}/#{arch}/repodata.json")["packages"]
         blob.each_key do |key|
           version = blob[key]
           package_name = version["name"]
@@ -112,13 +114,13 @@ class Conda
     def release_version(artifact, package_version)
       {
         artifact: artifact,
-        download_url: "https://#{@domain}/#{@channel}/#{package_version['subdir']}/#{artifact}",
+        download_url: "https://#{@domain}/#{@channel_name}/#{package_version['subdir']}/#{artifact}",
         number: package_version["version"],
         original_license: package_version["license"],
         published_at: package_version["timestamp"].nil? ? nil : Time.at(package_version["timestamp"] / 1000),
         dependencies: package_version["depends"],
         arch: package_version["subdir"],
-        channel: @channel,
+        channel: @channel_name,
       }
     end
 
