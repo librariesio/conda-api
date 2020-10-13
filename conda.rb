@@ -25,7 +25,7 @@ class Conda
     @channels.each_value do |channel|
       channel.only_one_version_packages.each do |package_name, package|
         if all_packages.key?(package_name)
-          all_packages[package_name][:versions] = all_packages[package_name][:versions] + package[:versions]
+          all_packages[package_name][:versions] += package[:versions]
         else
           all_packages[package_name] = package
         end
