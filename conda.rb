@@ -6,32 +6,38 @@ require "singleton"
 
 class Conda
   include Singleton
-
   def initialize
     @channels = {
       "main" => Conda::Channel.new("main", "repo.anaconda.com/pkgs"),
       "conda-forge" => Conda::Channel.new("conda-forge", "conda.anaconda.org"),
     }
+    @lock = Concurrent::ReadWriteLock.new
+    new_packages = all_packages
+    @lock.with_write_lock { @packages = new_packages }
   end
 
-  def packages(channel)
+  def packages_by_channel(channel)
     raise Sinatra::NotFound unless @channels.key?(channel)
 
     @channels[channel].packages
   end
 
+  def packages
+    @lock.with_read_lock { @packages }
+  end
+
   def all_packages
-    all_packages = {}
+    global_packages = {}
     @channels.each_value do |channel|
       channel.only_one_version_packages.each do |package_name, package|
-        if all_packages.key?(package_name)
-          all_packages[package_name][:versions] += package[:versions]
+        if global_packages.key?(package_name)
+          global_packages[package_name][:versions] += package[:versions]
         else
-          all_packages[package_name] = package
+          global_packages[package_name] = package
         end
       end
     end
-    all_packages
+    global_packages
   end
 
   def package(channel, name)
@@ -44,11 +50,14 @@ class Conda
   def find_package(name)
     package = @channels.values.find { |channel| channel.packages.key?(name) }&.packages&.dig(name)
     raise Sinatra::NotFound if package.nil?
+
     package
   end
 
   def reload_all
     @channels.each_value(&:reload)
+    new_packages = all_packages
+    @lock.with_write_lock { @packages = new_packages }
   end
 
   class Channel

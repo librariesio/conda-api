@@ -14,7 +14,7 @@ class CondaAPI < Sinatra::Base
 
   get "/packages" do
     content_type :json
-    Conda.instance.all_packages.to_json
+    Conda.instance.packages.to_json
   end
 
   get "/package/:name" do
@@ -24,7 +24,7 @@ class CondaAPI < Sinatra::Base
 
   get "/:channel/" do
     content_type :json
-    Conda.instance.packages(params["channel"]).to_json
+    Conda.instance.packages_by_channel(params["channel"]).to_json
   end
 
   get "/:channel/:name" do
