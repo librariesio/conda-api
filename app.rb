@@ -9,7 +9,7 @@ class CondaAPI < Sinatra::Base
   scheduler = Rufus::Scheduler.new
 
   get "/" do
-    "Last updated at #{Conda.instance.main.timestamp} \n"
+    "Last updated at #{Conda.instance.channels.values.first.timestamp} \n"
   end
 
   get "/packages" do
