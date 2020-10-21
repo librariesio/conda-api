@@ -22,6 +22,13 @@ class CondaAPI < Sinatra::Base
     Conda.instance.find_package(params["name"]).to_json
   end
 
+  get "/package/:name/:version" do
+    content_type :json
+    package = Conda.instance.find_package(params["name"])
+    package[:versions] = package[:versions]&.select { |version| version[:number] == params["version"] }
+    package.to_json
+  end
+
   get "/:channel/" do
     content_type :json
     Conda.instance.packages_by_channel(params["channel"]).to_json
