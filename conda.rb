@@ -7,6 +7,7 @@ require "singleton"
 class Conda
   include Singleton
   attr_reader :channels
+
   def initialize
     @channels = {
       "main" => Conda::Channel.new("main", "repo.anaconda.com/pkgs"),
@@ -24,7 +25,7 @@ class Conda
   end
 
   def packages
-    @lock.with_read_lock{ @packages }
+    @lock.with_read_lock { @packages }
   end
 
   def all_packages
@@ -51,6 +52,7 @@ class Conda
   def find_package(name)
     package = @channels.values.find { |channel| channel.packages.key?(name) }&.packages&.dig(name)
     raise Sinatra::NotFound if package.nil?
+
     package
   end
 
