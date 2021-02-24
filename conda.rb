@@ -43,7 +43,7 @@ class Conda
   end
 
   def package(channel, name)
-    packs = packages(channel)
+    packs = packages_by_channel(channel)
     raise Sinatra::NotFound unless packs.key?(name)
 
     packs[name]
