@@ -39,7 +39,7 @@ class CondaAPI < Sinatra::Base
     Conda.instance.package(params["channel"], params["name"]).to_json
   end
 
-  scheduler.every "1h" do
+  scheduler.every "15m" do
     puts "Reloading packages..."
     Conda.instance.reload_all
     puts "Reload finished"
