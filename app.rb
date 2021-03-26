@@ -39,7 +39,12 @@ class CondaAPI < Sinatra::Base
     Conda.instance.package(params["channel"], params["name"]).to_json
   end
 
-  scheduler.every "1h" do
+  get "/:channel/:name/:version" do
+    content_type :json
+    Conda.instance.package_by_channel(params["channel"], params["name"], params["version"]).to_json
+  end
+
+  scheduler.every "15m" do
     puts "Reloading packages..."
     Conda.instance.reload_all
     puts "Reload finished"
