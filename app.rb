@@ -41,7 +41,7 @@ class CondaAPI < Sinatra::Base
 
   get "/:channel/:name/:version" do
     content_type :json
-    Conda.instance.channels[params["channel"]].packages.to_json
+    Conda.instance.package_by_channel(params["channel"], params["name"], params["version"]).to_json
   end
 
   scheduler.every "15m" do

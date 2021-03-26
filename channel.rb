@@ -26,6 +26,14 @@ class Channel
     @lock.with_read_lock { @packages }
   end
 
+  def package_version(name, version)
+    @lock.with_read_lock do
+      raise Sinatra::NotFound unless @packages.key?(name)
+
+      @packages[name][:versions].filter { |package| package[:number] == version }
+    end
+  end
+
   def only_one_version_packages
     @lock.with_read_lock { remove_duplicate_versions(@packages) }
   end

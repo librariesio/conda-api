@@ -24,6 +24,12 @@ class Conda
     @channels[channel].packages
   end
 
+  def package_by_channel(channel, name, version)
+    raise Sinatra::NotFound unless @channels.key?(channel)
+
+    @channels[channel].package_version(name, version)
+  end
+
   def packages
     @lock.with_read_lock { @packages }
   end
