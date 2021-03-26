@@ -9,8 +9,8 @@ class Conda
 
   def initialize
     @channels = {
-      "main" => Channel.new("main", "repo.anaconda.com/pkgs"),
-      "conda-forge" => Channel.new("conda-forge", "conda.anaconda.org"),
+      "Main" => Channel.new("main", "repo.anaconda.com/pkgs"),
+      "CondaForge" => Channel.new("conda-forge", "conda.anaconda.org"),
     }
     @lock = Concurrent::ReadWriteLock.new
     new_packages = all_packages
