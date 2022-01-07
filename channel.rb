@@ -2,6 +2,7 @@
 
 require "httparty"
 require "json"
+require "benchmark"
 
 class Channel
   ARCHES = %w[linux-32 linux-64 linux-aarch64 linux-armv6l linux-armv7l linux-ppc64le osx-64 win-64 win-32 noarch zos-z].freeze
@@ -42,9 +43,9 @@ class Channel
 
   def retrieve_packages
     packages = {}
-    puts "Fetching packages for channel #{"https://#{@domain}/#{@channel_name}..."
+    puts "Fetching packages for channel https://#{@domain}/#{@channel_name}..."
     channeldata = HTTParty.get("https://#{@domain}/#{@channel_name}/channeldata.json")["packages"]
-    ms = Benchmark.ms do
+    benchmark = Benchmark.measure do
       ARCHES.each do |arch|
         blob = HTTParty.get("https://#{@domain}/#{@channel_name}/#{arch}/repodata.json")["packages"]
         blob.each_key do |key|
@@ -60,7 +61,7 @@ class Channel
         end
       end
     end
-    puts "Finished in #{ms}ms"
+    puts "Finished in #{benchmark.real} sec"
     packages
   end
 
