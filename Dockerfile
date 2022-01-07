@@ -1,4 +1,4 @@
-FROM ruby:2.6.6-alpine
+FROM ruby:2.7.5-alpine
 RUN apk add --update \
   build-base git curl-dev \
   && rm -rf /var/cache/apk/*
@@ -14,4 +14,4 @@ COPY Gemfile Gemfile.lock /usr/src/app/
 RUN bundle install --without test --jobs 2
 
 COPY . /usr/src/app
-CMD ["puma"]
+CMD ["bundle", "exec", "puma", "config.ru"]

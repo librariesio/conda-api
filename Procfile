@@ -1,1 +1,1 @@
-web: puma config.ru
+web: puma config.ru --log-requests

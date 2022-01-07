@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-ruby "2.6.6"
+ruby "2.7.5"
 
 gem "builder"
 gem "concurrent-ruby"
 gem "foreman"
 gem "httparty"
-gem "puma"
+gem "puma", "5.5.2"
 gem "rufus-scheduler"
 gem "sinatra"
 
