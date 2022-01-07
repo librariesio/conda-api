@@ -8,6 +8,10 @@ require "rufus-scheduler"
 class CondaAPI < Sinatra::Base
   scheduler = Rufus::Scheduler.new
 
+  configure :production, :development do
+    enable :logging
+  end
+
   get "/" do
     "Last updated at #{Conda.instance.channels.values.first.timestamp} \n"
   end

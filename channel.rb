@@ -42,21 +42,25 @@ class Channel
 
   def retrieve_packages
     packages = {}
+    puts "Fetching packages for channel #{"https://#{@domain}/#{@channel_name}..."
     channeldata = HTTParty.get("https://#{@domain}/#{@channel_name}/channeldata.json")["packages"]
-    ARCHES.each do |arch|
-      blob = HTTParty.get("https://#{@domain}/#{@channel_name}/#{arch}/repodata.json")["packages"]
-      blob.each_key do |key|
-        version = blob[key]
-        package_name = version["name"]
+    ms = Benchmark.ms do
+      ARCHES.each do |arch|
+        blob = HTTParty.get("https://#{@domain}/#{@channel_name}/#{arch}/repodata.json")["packages"]
+        blob.each_key do |key|
+          version = blob[key]
+          package_name = version["name"]
 
-        unless packages.key?(package_name)
-          package_data = channeldata[package_name]
-          packages[package_name] = base_package(package_data, package_name)
+          unless packages.key?(package_name)
+            package_data = channeldata[package_name]
+            packages[package_name] = base_package(package_data, package_name)
+          end
+
+          packages[package_name][:versions] << release_version(key, version)
         end
-
-        packages[package_name][:versions] << release_version(key, version)
       end
     end
+    puts "Finished in #{ms}ms"
     packages
   end
 
