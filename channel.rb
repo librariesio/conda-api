@@ -61,7 +61,7 @@ class Channel
         end
       end
     end
-    puts "Finished in #{benchmark.real} sec: #{packages.to_json.bytesize / 1_000_000}mb of data."
+    puts "Finished in #{benchmark.real.round(1)} sec: #{packages.to_json.bytesize / 1_000_000}mb of data."
     packages
   end
 
