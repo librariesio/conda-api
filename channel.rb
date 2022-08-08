@@ -59,6 +59,8 @@ class Channel
 
           packages[package_name][:versions] << release_version(key, version)
         end
+      rescue => e
+        puts "Failed to fetch for #{arch} https://#{@domain}/#{@channel_name}/#{arch}/repodata.json"
       end
     end
     puts "Finished in #{benchmark.real.round(1)} sec: #{packages.to_json.bytesize / 1_000_000}mb of data."
