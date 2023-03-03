@@ -45,22 +45,36 @@ class Channel
     packages = {}
     puts "Fetching packages for channel https://#{@domain}/#{@channel_name}..."
     channeldata = HTTParty.get("https://#{@domain}/#{@channel_name}/channeldata.json")["packages"]
+
     benchmark = Benchmark.measure do
       ARCHES.each do |arch|
-        blob = HTTParty.get("https://#{@domain}/#{@channel_name}/#{arch}/repodata.json")["packages"]
-        blob.each_key do |key|
-          version = blob[key]
-          package_name = version["name"]
+        repo_data_url = "https://#{@domain}/#{@channel_name}/#{arch}/repodata.json"
+        response = HTTParty.get(repo_data_url)
 
-          unless packages.key?(package_name)
-            package_data = channeldata[package_name]
-            packages[package_name] = base_package(package_data, package_name)
+        blobs = [response["packages"], response["packages.conda"]]
+
+        blobs.each do |blob|
+          next if blob.nil?
+
+          blob.each_key do |key|
+            version = blob[key]
+            package_name = version["name"]
+
+            if channeldata[package_name].nil?
+              puts "Unable to get channel data for package #{package_name} from url: #{repo_data_url}"
+              next
+            end
+
+            unless packages.key?(package_name)
+              package_data = channeldata[package_name]
+              packages[package_name] = base_package(package_data, package_name)
+            end
+
+            packages[package_name][:versions] << release_version(key, version)
           end
-
-          packages[package_name][:versions] << release_version(key, version)
         end
-      rescue => e
-        puts "Failed to fetch for #{arch} https://#{@domain}/#{@channel_name}/#{arch}/repodata.json"
+      rescue StandardError => e
+        puts "Failed to fetch for #{arch} #{repo_data_url}. #{e.class}: #{e.message}"
       end
     end
     puts "Finished in #{benchmark.real.round(1)} sec: #{packages.to_json.bytesize / 1_000_000}mb of data."
