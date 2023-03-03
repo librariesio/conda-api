@@ -1,0 +1,893 @@
+{
+  "info": {
+    "subdir": "noarch"
+  },
+  "packages": {
+    "_current_repodata_hack_gcc_linux_64_75-0.0.1-0.tar.bz2": {
+      "build": "0",
+      "build_number": 0,
+      "depends": [
+        "gcc_linux-64 7.5.*"
+      ],
+      "license": "LicenseRef-OTHER",
+      "md5": "6f29ba77e8b03b191c9d667f331bf2a0",
+      "name": "_current_repodata_hack_gcc_linux_64_75",
+      "noarch": "generic",
+      "sha256": "ecde63af23e0d49c0ece19ec539d873ea408a6f966d3126994c6d33ae1b9d3f7",
+      "size": 3357,
+      "subdir": "noarch",
+      "timestamp": 1599854591823,
+      "version": "0.0.1"
+    },
+    "_current_repodata_hack_gcc_linux_64_84-0.0.1-0.tar.bz2": {
+      "build": "0",
+      "build_number": 0,
+      "depends": [
+        "gcc_linux-64 8.4.*"
+      ],
+      "license": "LicenseRef-OTHER",
+      "md5": "e7d3afa400b27989a4381d58cfec740a",
+      "name": "_current_repodata_hack_gcc_linux_64_84",
+      "noarch": "generic",
+      "sha256": "5fb50ad4ab4615559987b9ec3a9e387de6f26a5ea9f69a769d7b6d980b4f987a",
+      "size": 3351,
+      "subdir": "noarch",
+      "timestamp": 1599854615753,
+      "version": "0.0.1"
+    },
+    "_current_repodata_hack_gcc_linux_aarch64_75-0.0.1-0.tar.bz2": {
+      "build": "0",
+      "build_number": 0,
+      "depends": [
+        "gcc_linux-aarch64 7.5.*"
+      ],
+      "license": "LicenseRef-OTHER",
+      "md5": "a02e93fbfdad3347b95e9ea4f64a2248",
+      "name": "_current_repodata_hack_gcc_linux_aarch64_75",
+      "noarch": "generic",
+      "sha256": "ee0c2fbf22dd6353605d6f68df056d6b41ce02bd9adfc138545d4c6a4e95ce67",
+      "size": 3427,
+      "subdir": "noarch",
+      "timestamp": 1599854683958,
+      "version": "0.0.1"
+    },
+    "_current_repodata_hack_gcc_linux_aarch64_84-0.0.1-0.tar.bz2": {
+      "build": "0",
+      "build_number": 0,
+      "depends": [
+        "gcc_linux-aarch64 8.4.*"
+      ],
+      "license": "LicenseRef-OTHER",
+      "md5": "37f4d678daab62eed5cecb188bef4f99",
+      "name": "_current_repodata_hack_gcc_linux_aarch64_84",
+      "noarch": "generic",
+      "sha256": "2f635d68a29c0c0ff4f6f57f32265ae2acd5a62fc52188a8b4a3dbbf99e4a749",
+      "size": 3439,
+      "subdir": "noarch",
+      "timestamp": 1599854759478,
+      "version": "0.0.1"
+    },
+    "_current_repodata_hack_gcc_linux_ppc64le_75-0.0.1-0.tar.bz2": {
+      "build": "0",
+      "build_number": 0,
+      "depends": [
+        "gcc_linux-ppc64le 7.5.*"
+      ],
+      "license": "LicenseRef-OTHER",
+      "md5": "4ec64f48695247547d4cac078561475e",
+      "name": "_current_repodata_hack_gcc_linux_ppc64le_75",
+      "noarch": "generic",
+      "sha256": "fd062eb0b7f3544408cd6180adf6365060adf43d6b4e4bee4bc4cc8d91342415",
+      "size": 3425,
+      "subdir": "noarch",
+      "timestamp": 1599854831497,
+      "version": "0.0.1"
+    },
+    "_current_repodata_hack_gcc_linux_ppc64le_84-0.0.1-0.tar.bz2": {
+      "build": "0",
+      "build_number": 0,
+      "depends": [
+        "gcc_linux-ppc64le 8.4.*"
+      ],
+      "license": "LicenseRef-OTHER",
+      "md5": "137d5828171c8ccb307fd2d2c5114c2c",
+      "name": "_current_repodata_hack_gcc_linux_ppc64le_84",
+      "noarch": "generic",
+      "sha256": "5777454451a7e8c9147817c64fbf98748b8d5c230f9fe4ceabb6e83b3fc5b736",
+      "size": 3428,
+      "subdir": "noarch",
+      "timestamp": 1599854903488,
+      "version": "0.0.1"
+    },
+    "ansible-core-2.11.0-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "d05213f4b50f9df4ad64fbaa6659f8fe",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "63c6584f811649f23d84789e00e22b246d12680d8a8069f20c87cec4fd62681c",
+      "size": 1263645,
+      "subdir": "noarch",
+      "timestamp": 1622320234659,
+      "version": "2.11.0"
+    },
+    "ansible-core-2.11.1-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "aa5160a34070b1886d9f318f34230174",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "ae40043aef2a639e1bb426ad2e2ffed9e3d849c4555f03dac0ba2089cd70db1d",
+      "size": 1265868,
+      "subdir": "noarch",
+      "timestamp": 1622493457678,
+      "version": "2.11.1"
+    },
+    "ansible-core-2.11.2-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "fee7c6f3c30c4f2db1fc9e2bdd9a80c2",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "e97641b668e4a3272342c27bfdd1046d9ae4309dc8a84464d008e2d1e17aa43c",
+      "size": 1261172,
+      "subdir": "noarch",
+      "timestamp": 1624404653658,
+      "version": "2.11.2"
+    },
+    "ansible-core-2.11.3-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "9bde2bef039801f2afae9b3797b6c0e5",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "b06adca766716c2e933b5ca0d7db1e33cb235cda9a161ee6fb11ccd475475844",
+      "size": 1254244,
+      "subdir": "noarch",
+      "timestamp": 1626744223940,
+      "version": "2.11.3"
+    },
+    "ansible-core-2.11.4-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "a14895e584d8ef26ade0e621ce45b8d4",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "b405f739340e55f6b132d1cd493191831ee1d34fb1e86e569562d04529fd535f",
+      "size": 1262812,
+      "subdir": "noarch",
+      "timestamp": 1629146557942,
+      "version": "2.11.4"
+    },
+    "ansible-core-2.11.5-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "86c356013831243209fca3ccf37583ab",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "4179c0c558a98b9d2dedc3db92f106ff144c710a34579ce919f2b2d61f7ccd64",
+      "size": 1259018,
+      "subdir": "noarch",
+      "timestamp": 1631638627893,
+      "version": "2.11.5"
+    },
+    "ansible-core-2.11.6-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "56992989eb762b59c47a3d21804caa18",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "af8bd030441051b31903d2e876b1b180eef4630a52ff2441cfd7dc35675da187",
+      "size": 1268982,
+      "subdir": "noarch",
+      "timestamp": 1633980632797,
+      "version": "2.11.6"
+    },
+    "ansible-core-2.12.0-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "0e2a999a11d2c246eec1f865cd4b8293",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "517e43f3ac3c4c4c181221e101ba80ea354eb396012abda4effab6498aa0e5b9",
+      "size": 1336944,
+      "subdir": "noarch",
+      "timestamp": 1636397429242,
+      "version": "2.12.0"
+    },
+    "ansible-core-2.12.1-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "2692c5a92abef69476d448974f694101",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "c846eea5da6b4064da5887e4011c469875a0cb47b05241a1132490cdcdb41182",
+      "size": 1339594,
+      "subdir": "noarch",
+      "timestamp": 1638832564710,
+      "version": "2.12.1"
+    },
+    "ansible-core-2.12.2-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "02d5549914771c4863e8e82c8e6f81c2",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "07710439af6846db40926de19ff0ca714328ddb3e7da2cc71f46925cd6a6b8bd",
+      "size": 1339487,
+      "subdir": "noarch",
+      "timestamp": 1643674106201,
+      "version": "2.12.2"
+    },
+    "ansible-core-2.12.3-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "1eb04944fc726823271c27b57c4957d9",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "6f0a666b268b13efea41a0cce527f7aab9d7f785543347799ee686ed7a7c0d5c",
+      "size": 1336362,
+      "subdir": "noarch",
+      "timestamp": 1646068572015,
+      "version": "2.12.3"
+    },
+    "ansible-core-2.12.4-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "9ef19eba1cbc9c1e2f506ab32f834612",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "bf4eaa9978cac5d73bec0789cbaedfc64c0f3ab5c7291920c8de0b0713455c7c",
+      "size": 1344255,
+      "subdir": "noarch",
+      "timestamp": 1648506528593,
+      "version": "2.12.4"
+    },
+    "ansible-core-2.12.5-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "f19becf20a7e5572ecc068a417761f91",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "13f5678ce6da1a6dde7986f54fbb6eb685aabddc46a4d280dad2e2f00ae89625",
+      "size": 1336007,
+      "subdir": "noarch",
+      "timestamp": 1651689744487,
+      "version": "2.12.5"
+    },
+    "ansible-core-2.13.0-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "b6bf1f250ff3ece5b86e0a28fa83d4e7",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "10babf4b0a499cef9ff7dbf616a5da0dd573ae1e6b75fe3e5de97ec41f02e6cc",
+      "size": 1348749,
+      "subdir": "noarch",
+      "timestamp": 1652739071700,
+      "version": "2.13.0"
+    },
+    "ansible-core-2.13.1-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "af967b18b3cd0a8af2f781031ea9e84b",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "dfc5d0fcee5503e63d5f0d37fa2a0779c392730119b8e94a1cdede90725cf52a",
+      "size": 1356448,
+      "subdir": "noarch",
+      "timestamp": 1655836748738,
+      "version": "2.13.1"
+    },
+    "ansible-core-2.13.2-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "e7ffe94c1c0c2daec7a5cee1b072d312",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "a98775716bd5d4bfcc2a7769ab569f5a8fbcf2e855d91cc55b79f9627a3bef2a",
+      "size": 1358028,
+      "subdir": "noarch",
+      "timestamp": 1658185981720,
+      "version": "2.13.2"
+    },
+    "ansible-core-2.13.3-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "dc3702060bb7b6262be407f8d8f26d9a",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "97cb186c7ddf5a0ff8c61d344e4c2c57943f6a3cc116660f70e0cd83d91ab99b",
+      "size": 1357172,
+      "subdir": "noarch",
+      "timestamp": 1660618378807,
+      "version": "2.13.3"
+    },
+    "ansible-core-2.13.4-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "82a23df62a3f4fe6300eafbc37935395",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "291c5b8154c2b5b1fb362b8e3d54749e91323360bd37e6c431bedb2b2c8166f4",
+      "size": 1358803,
+      "subdir": "noarch",
+      "timestamp": 1663457684428,
+      "version": "2.13.4"
+    },
+    "ansible-core-2.13.5-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "f26a0724afbbd0cae275743fb9cfb922",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "4c93e2f0f24ffce6c663d6c82ee8dcd691bfd9be5a4a1431622d73110acb5300",
+      "size": 1361655,
+      "subdir": "noarch",
+      "timestamp": 1665509593342,
+      "version": "2.13.5"
+    },
+    "ansible-core-2.13.5-pyhd8ed1ab_1.tar.bz2": {
+      "build": "pyhd8ed1ab_1",
+      "build_number": 1,
+      "depends": [
+        "cryptography",
+        "jinja2 >=3.0",
+        "packaging",
+        "python >=3.5",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "aa2ce69c331e3267559930d88308a161",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "216ca1fc39ec1f7a639b46c9fa38229dd58520355f74e25ae811071da84d537c",
+      "size": 1358865,
+      "subdir": "noarch",
+      "timestamp": 1666483791514,
+      "version": "2.13.5"
+    },
+    "ansible-core-2.13.5-pyhd8ed1ab_2.tar.bz2": {
+      "build": "pyhd8ed1ab_2",
+      "build_number": 2,
+      "depends": [
+        "cryptography",
+        "jinja2 >=3.0",
+        "packaging",
+        "python >=3.8",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "fbf5967768d28b9afab1480d174ef722",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "32f3bec94a8ac5c532f4ff8cc7353b439f6f3ccda04ebdb30f2c6203445141c4",
+      "size": 1352485,
+      "subdir": "noarch",
+      "timestamp": 1666721014351,
+      "version": "2.13.5"
+    },
+    "ansible-core-2.14.0-pyhd8ed1ab_0.tar.bz2": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2 >=3.0",
+        "packaging",
+        "python >=3.8",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "646fe50a8102e1a7dc28258240e52951",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "ef1476d1d54ff5441efdd666c83cad5b181e9998402db69d6ed19dcbc24b4695",
+      "size": 1399000,
+      "subdir": "noarch",
+      "timestamp": 1667953158766,
+      "version": "2.14.0"
+    },
+    "black-18.4a4-py_0.tar.bz2": {
+      "arch": null,
+      "build": "py_0",
+      "build_number": 0,
+      "depends": [
+        "appdirs",
+        "attrs >=17.4.0",
+        "click",
+        "python >=3.6"
+      ],
+      "license": "MIT",
+      "license_family": "MIT",
+      "md5": "0e087e6b9cce1668ccaf23d5258758d7",
+      "name": "black",
+      "noarch": "python",
+      "platform": null,
+      "sha256": "1c17700ccbaa6e48a1fa27cc2c52360d989ec63c35d14ac14b34a8528a86d588",
+      "size": 58045,
+      "subdir": "noarch",
+      "timestamp": 1525256829875,
+      "version": "18.4a4"
+    },
+    "black-18.5b0-py_0.tar.bz2": {
+      "arch": null,
+      "build": "py_0",
+      "build_number": 0,
+      "depends": [
+        "appdirs",
+        "attrs >=17.4.0",
+        "click",
+        "python >=3.6"
+      ],
+      "license": "MIT",
+      "license_family": "MIT",
+      "md5": "898afc9cf8b0dcee5c834d54e6431bdb",
+      "name": "black",
+      "noarch": "python",
+      "platform": null,
+      "sha256": "07f9d50697ea043f8442f50f411449dfa3424ddf980710c64cb12363807d3a93",
+      "size": 63360,
+      "subdir": "noarch",
+      "timestamp": 1527259806828,
+      "version": "18.5b0"
+    },
+    "black-18.5b1-py_0.tar.bz2": {
+      "arch": null,
+      "build": "py_0",
+      "build_number": 0,
+      "depends": [
+        "appdirs",
+        "attrs >=17.4.0",
+        "click",
+        "python >=3.6"
+      ],
+      "license": "MIT",
+      "license_family": "MIT",
+      "md5": "c599af67aaa56ab9605accc150634741",
+      "name": "black",
+      "noarch": "python",
+      "platform": null,
+      "sha256": "a0c1bf0c37ea828307799f8e3224288acbb08742162bf5920093625be7abb230",
+      "size": 64737,
+      "subdir": "noarch",
+      "timestamp": 1528084779932,
+      "version": "18.5b1"
+    },
+    "black-18.6b2-py_0.tar.bz2": {
+      "arch": null,
+      "build": "py_0",
+      "build_number": 0,
+      "depends": [
+        "appdirs",
+        "attrs >=17.4.0",
+        "click >=6.5",
+        "python >=3.6",
+        "toml >=0.9.4"
+      ],
+      "license": "MIT",
+      "license_family": "MIT",
+      "md5": "c93f78b511c03685fa09d9cddbe271c4",
+      "name": "black",
+      "noarch": "python",
+      "platform": null,
+      "sha256": "fb426ad7ce93a09e425ed7d6169fac3d990fc12cbf71c4a2e99d7b5aab4ae28f",
+      "size": 68513,
+      "subdir": "noarch",
+      "timestamp": 1528974649013,
+      "version": "18.6b2"
+    },
+    "black-18.6b4-py_0.tar.bz2": {
+      "build": "py_0",
+      "build_number": 0,
+      "depends": [
+        "appdirs",
+        "attrs >=17.4.0",
+        "click >=6.5",
+        "python >=3.6",
+        "toml >=0.9.4"
+      ],
+      "license": "MIT",
+      "license_family": "MIT",
+      "md5": "8c55eabbe137a51d1b4d6685ca32b846",
+      "name": "black",
+      "noarch": "python",
+      "sha256": "0020ef8bf658645ab5dcf1eedae0c13a5b22b5878158d16125b21c9881564eec",
+      "size": 70844,
+      "subdir": "noarch",
+      "timestamp": 1537191340387,
+      "version": "18.6b4"
+    },
+    "black-18.9b0-py_0.tar.bz2": {
+      "build": "py_0",
+      "build_number": 0,
+      "depends": [
+        "appdirs",
+        "attrs >=18.1.0",
+        "click >=6.5",
+        "python >=3.6",
+        "toml >=0.9.4"
+      ],
+      "license": "MIT",
+      "license_family": "MIT",
+      "md5": "5775404dd79b2287a364c94c37a28c68",
+      "name": "black",
+      "noarch": "python",
+      "sha256": "80c9701313632dca4930095aa5882f19372199281af5b97da83a407bd9bb4ed9",
+      "size": 74736,
+      "subdir": "noarch",
+      "timestamp": 1538666500938,
+      "version": "18.9b0"
+    }
+  },
+  "packages.conda": {
+    "about-time-4.2.0-pyhd8ed1ab_0.conda": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "python >=3.7,<4.0"
+      ],
+      "license": "MIT",
+      "license_family": "MIT",
+      "md5": "9ff5fa06780cd80ea44370b64c1b9e23",
+      "name": "about-time",
+      "noarch": "python",
+      "sha256": "a7bba71452795688b4ef2b768046526104fa8b0d9cb8112d68089de569701c36",
+      "size": 16043,
+      "subdir": "noarch",
+      "timestamp": 1671529833919,
+      "version": "4.2.0"
+    },
+    "about-time-4.2.1-pyhd8ed1ab_0.conda": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "python >=3.7,<4.0"
+      ],
+      "license": "MIT",
+      "license_family": "MIT",
+      "md5": "0db4f019c8bbef731fd060d4d596a042",
+      "name": "about-time",
+      "noarch": "python",
+      "sha256": "b8bcb7881ca3b23b6d05fba77a8163f022bfd03bfad14ad953a0f9e54346ff91",
+      "size": 16059,
+      "subdir": "noarch",
+      "timestamp": 1671605279528,
+      "version": "4.2.1"
+    },
+    "absl-py-1.4.0-pyhd8ed1ab_0.conda": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "python >=3.6"
+      ],
+      "license": "Apache-2.0",
+      "license_family": "Apache",
+      "md5": "dd5eed01874c75bebef810a2faec673e",
+      "name": "absl-py",
+      "noarch": "python",
+      "sha256": "1cc3eb4ee86271dfcfb0673cb7aa2632e43024b7f1324ca23689dcfbe0631b2f",
+      "size": 101980,
+      "subdir": "noarch",
+      "timestamp": 1673535809410,
+      "version": "1.4.0"
+    },
+    "ansible-core-2.14.1-pyhd8ed1ab_0.conda": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2 >=3.0",
+        "packaging",
+        "python >=3.8",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "19cd65b809eee1f2d1be4071a7b5997e",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "4340df74c30fac82f0e88bf1427175e6775774c06ccfa9303ff730fb2397879e",
+      "size": 1304667,
+      "subdir": "noarch",
+      "timestamp": 1670371310605,
+      "version": "2.14.1"
+    },
+    "ansible-core-2.14.2-pyhd8ed1ab_0.conda": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2 >=3.0",
+        "packaging",
+        "python >=3.8",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "license_family": "GPL",
+      "md5": "286de866e81f643cee8f580cd991faa6",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "9b6d5fc6c92928d7fcb5a00a1e2af85c2336bca9b574615cee10306a80fd923c",
+      "size": 1318943,
+      "subdir": "noarch",
+      "timestamp": 1675106685258,
+      "version": "2.14.2"
+    },
+    "ansible-core-2.14.3-pyhd8ed1ab_0.conda": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "cryptography",
+        "jinja2 >=3.0",
+        "packaging",
+        "python >=3.8",
+        "pyyaml",
+        "resolvelib <0.6.0,>=0.5.3"
+      ],
+      "license": "GPL-3.0-or-later",
+      "md5": "5367726d680e6b874316f037ab6a05ba",
+      "name": "ansible-core",
+      "noarch": "python",
+      "sha256": "f2292b0eaf87f16e5d11140827d8b8b4c1c536cc63512b9253c7d99b81921862",
+      "size": 1320363,
+      "subdir": "noarch",
+      "timestamp": 1677559646350,
+      "version": "2.14.3"
+    },
+    "baked-brie-1.0.0-pyhd8ed1ab_0.conda": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "bmipy",
+        "numpy",
+        "python >=3.8",
+        "pyyaml",
+        "scipy"
+      ],
+      "license": "MIT",
+      "license_family": "MIT",
+      "md5": "f43653bf498aeaa37e0fb7ef32da2dfd",
+      "name": "baked-brie",
+      "noarch": "python",
+      "sha256": "45d965fb35a74e1e51a40bba9854298c68044a92eaacb2a307a3f6a5c075d581",
+      "size": 30762,
+      "subdir": "noarch",
+      "timestamp": 1677688686988,
+      "version": "1.0.0"
+    },
+    "django-safedelete-1.3.1-pyhd8ed1ab_0.conda": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "django",
+        "python >=3.6"
+      ],
+      "license": "BSD-3-Clause",
+      "md5": "2486e30a227537e46aebdccba4a74fa6",
+      "name": "django-safedelete",
+      "noarch": "python",
+      "sha256": "d6801cce64e0300891b007146e78692e033a7e29c6377fb89086b661f3735b72",
+      "size": 35490,
+      "subdir": "noarch",
+      "timestamp": 1677696239208,
+      "version": "1.3.1"
+    },
+    "pygwalker-0.1.4.6-pyhd8ed1ab_0.conda": {
+      "build": "pyhd8ed1ab_0",
+      "build_number": 0,
+      "depends": [
+        "ipython",
+        "jinja2",
+        "pandas",
+        "python >=3.6,<4.0"
+      ],
+      "license": "Apache-2.0",
+      "md5": "c3ee2b05db452d0000d1d11b158880b7",
+      "name": "pygwalker",
+      "noarch": "python",
+      "sha256": "127c441af0ebe5449ec48ac832e4377547cbfc386ea3ebb64eabe917f2a48780",
+      "size": 637093,
+      "subdir": "noarch",
+      "timestamp": 1677699591519,
+      "version": "0.1.4.6"
+    }
+  }
+}
