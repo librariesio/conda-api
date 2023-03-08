@@ -51,7 +51,9 @@ class Channel
         repo_data_url = "https://#{@domain}/#{@channel_name}/#{arch}/repodata.json"
         response = HTTParty.get(repo_data_url)
 
-        blobs = [response["packages"], response["packages.conda"]]
+        parsed_response = JSON.parse(response.body)
+
+        blobs = [parsed_response["packages"], parsed_response["packages.conda"]]
 
         blobs.each do |blob|
           next if blob.nil?
