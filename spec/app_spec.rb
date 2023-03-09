@@ -2,15 +2,21 @@
 
 describe CondaAPI do
   before do
-    allow(HTTParty).to receive(:get).and_return({})
-    allow(HTTParty).to receive(:get).with("https://conda.anaconda.org/conda-forge/channeldata.json")
-      .and_return(
-        json_load_fixture("pkgs/conda-forge/channeldata-small.json")
-      )
-    allow(HTTParty).to receive(:get).with("https://conda.anaconda.org/conda-forge/linux-64/repodata.json")
-      .and_return(
-        json_load_fixture("pkgs/conda-forge/linux-64-repodata-small.json")
-      )
+    stub_request(:get, /repo.anaconda.com/).to_return({ status: 200, body: "{}" })
+    stub_request(:get, /conda.anaconda.org/).to_return({ status: 200, body: "{}" })
+    # needs to be after the default webmock stubs
+    stub_request(:get,
+                 "https://conda.anaconda.org/conda-forge/channeldata.json")
+      .to_return({
+                   status: 200,
+                   body: load_fixture("pkgs/conda-forge/channeldata-small.json"),
+                 })
+    stub_request(:get,
+                 "https://conda.anaconda.org/conda-forge/linux-64/repodata.json")
+      .to_return({
+                   status: 200,
+                   body: load_fixture("pkgs/conda-forge/linux-64-repodata-small.json"),
+                 })
   end
 
   it "should show HelloWorld" do

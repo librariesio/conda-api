@@ -2,11 +2,15 @@
 
 describe Channel do
   before do
-    allow(HTTParty).to receive(:get).and_return({})
-    allow(HTTParty).to receive(:get).with("https://conda.anaconda.org/conda-forge/channeldata.json")
-      .and_return(
-        json_load_fixture("pkgs/conda-forge/channeldata-small.json")
-      )
+    stub_request(:get, /repo.anaconda.com/).to_return({ status: 200, body: "{}" })
+    stub_request(:get, /conda.anaconda.org/).to_return({ status: 200, body: "{}" })
+    # needs to be after the default webmock stubs
+    stub_request(:get,
+                 "https://conda.anaconda.org/conda-forge/channeldata.json")
+      .to_return({
+                   status: 200,
+                   body: load_fixture("pkgs/conda-forge/channeldata-small.json"),
+                 })
   end
 
   subject(:channel) { described_class.new("conda-forge", "conda.anaconda.org") }
@@ -14,10 +18,12 @@ describe Channel do
   describe "#packages" do
     context "when there is one arch source" do
       before do
-        allow(HTTParty).to receive(:get).with("https://conda.anaconda.org/conda-forge/noarch/repodata.json")
-          .and_return(
-            json_load_fixture("pkgs/conda-forge/noarch-repodata-small.json")
-          )
+        stub_request(:get,
+                     "https://conda.anaconda.org/conda-forge/noarch/repodata.json")
+          .to_return({
+                       status: 200,
+                       body: load_fixture("pkgs/conda-forge/noarch-repodata-small.json"),
+                     })
       end
 
       it "gets all the packages that have channel data from the one available arch source" do
@@ -47,10 +53,12 @@ describe Channel do
 
       context "when there are multiple arch sources" do
         before do
-          allow(HTTParty).to receive(:get).with("https://conda.anaconda.org/conda-forge/linux-64/repodata.json")
-            .and_return(
-              json_load_fixture("pkgs/conda-forge/linux-64-repodata-small.json")
-            )
+          stub_request(:get,
+                       "https://conda.anaconda.org/conda-forge/linux-64/repodata.json")
+            .to_return({
+                         status: 200,
+                         body: load_fixture("pkgs/conda-forge/linux-64-repodata-small.json"),
+                       })
         end
 
         it "gets all the packages that have channel data from all arch sources" do
@@ -79,10 +87,12 @@ describe Channel do
 
   describe "#package_version" do
     before do
-      allow(HTTParty).to receive(:get).with("https://conda.anaconda.org/conda-forge/noarch/repodata.json")
-        .and_return(
-          json_load_fixture("pkgs/conda-forge/noarch-repodata-small.json")
-        )
+      stub_request(:get,
+                   "https://conda.anaconda.org/conda-forge/noarch/repodata.json")
+        .to_return({
+                     status: 200,
+                     body: load_fixture("pkgs/conda-forge/noarch-repodata-small.json"),
+                   })
     end
 
     subject(:channel) { described_class.new("conda-forge", "conda.anaconda.org") }
