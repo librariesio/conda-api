@@ -1,11 +1,15 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.1)
     builder (3.2.3)
     byebug (11.1.3)
     coderay (1.1.2)
     concurrent-ruby (1.1.7)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     diff-lcs (1.3)
     et-orbi (1.2.4)
       tzinfo
@@ -14,6 +18,7 @@ GEM
     fugit (1.3.8)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.3)
+    hashdiff (1.0.0)
     httparty (0.17.0)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
@@ -33,6 +38,7 @@ GEM
     pry-byebug (3.8.0)
       byebug (~> 11.0)
       pry (~> 0.10)
+    public_suffix (4.0.6)
     puma (5.5.2)
       nio4r (~> 2.0)
     raabro (1.3.1)
@@ -71,6 +77,7 @@ GEM
     ruby-progressbar (1.10.1)
     rufus-scheduler (3.6.0)
       fugit (~> 1.1, >= 1.1.6)
+    safe_yaml (1.0.5)
     sinatra (2.0.3)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -83,6 +90,10 @@ GEM
     tzinfo-data (1.2020.1)
       tzinfo (>= 1.0.0)
     unicode-display_width (1.7.0)
+    webmock (3.6.2)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
 
 PLATFORMS
   ruby
@@ -101,6 +112,7 @@ DEPENDENCIES
   rufus-scheduler
   sinatra
   tzinfo-data (~> 1.2020)
+  webmock
 
 RUBY VERSION
    ruby 2.7.5p203

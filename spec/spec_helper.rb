@@ -3,6 +3,7 @@
 require "rack/test"
 require "rspec"
 require "pry"
+require "webmock/rspec"
 
 require "./conda"
 require "./app"
@@ -100,6 +101,10 @@ RSpec.configure do |config|
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
 end
+
+# Enforce that tests can't make unmocked http requests
+WebMock.disable_net_connect!(allow_localhost: true)
+WebMock.enable!
 
 def fixture_path(name)
   "spec/fixtures/#{name}"
