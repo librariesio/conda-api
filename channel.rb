@@ -44,7 +44,8 @@ class Channel
   def retrieve_packages
     packages = {}
     puts "Fetching packages for channel https://#{@domain}/#{@channel_name}..."
-    channeldata = HTTParty.get("https://#{@domain}/#{@channel_name}/channeldata.json")["packages"]
+    channel_response = HTTParty.get("https://#{@domain}/#{@channel_name}/channeldata.json")
+    channeldata = JSON.parse(channel_response.body)["packages"]
 
     benchmark = Benchmark.measure do
       ARCHES.each do |arch|
@@ -58,8 +59,7 @@ class Channel
         blobs.each do |blob|
           next if blob.nil?
 
-          blob.each_key do |key|
-            version = blob[key]
+          blob.each_pair do |artifact_filename, version|
             package_name = version["name"]
 
             if channeldata[package_name].nil?
@@ -72,7 +72,7 @@ class Channel
               packages[package_name] = base_package(package_data, package_name)
             end
 
-            packages[package_name][:versions] << release_version(key, version)
+            packages[package_name][:versions] << release_version(artifact_filename, version)
           end
         end
       rescue StandardError => e
