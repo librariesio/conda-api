@@ -18,6 +18,10 @@ class Conda
     @lock.with_write_lock { @packages = new_packages }
   end
 
+  def logger
+    @logger ||= Logger.new($stdout)
+  end
+
   def packages_by_channel(channel)
     raise Sinatra::NotFound unless @channels.key?(channel)
 
@@ -63,8 +67,10 @@ class Conda
   end
 
   def reload_all
+    logger.info "Reloading packages...."
     @channels.each_value(&:reload)
     new_packages = all_packages
     @lock.with_write_lock { @packages = new_packages }
+    logger.info "Reload finished...."
   end
 end

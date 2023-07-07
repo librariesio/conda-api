@@ -1,1 +1,1 @@
-web: puma config.ru --log-requests
+web: bundle exec puma config.ru -C config/puma.rb
