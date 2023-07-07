@@ -14,7 +14,7 @@ class Channel
     @domain = domain
     @timestamp = Time.now
     @lock = Concurrent::ReadWriteLock.new
-    reload
+    @packages = {}
   end
 
   def reload
@@ -39,11 +39,15 @@ class Channel
     @lock.with_read_lock { remove_duplicate_versions(@packages) }
   end
 
+  def logger
+    Conda.instance.logger
+  end
+
   private
 
   def retrieve_packages
     packages = {}
-    puts "Fetching packages for channel https://#{@domain}/#{@channel_name}..."
+    logger.info "Fetching packages for channel https://#{@domain}/#{@channel_name}..."
     channel_response = HTTParty.get("https://#{@domain}/#{@channel_name}/channeldata.json")
     channeldata = JSON.parse(channel_response.body)["packages"]
 
@@ -63,7 +67,7 @@ class Channel
             package_name = version["name"]
 
             if channeldata[package_name].nil?
-              puts "Unable to get channel data for package #{package_name} from url: #{repo_data_url}"
+              logger.info "Unable to get channel data for package #{package_name} from url: #{repo_data_url}"
               next
             end
 
@@ -76,10 +80,10 @@ class Channel
           end
         end
       rescue StandardError => e
-        puts "Failed to fetch for #{arch} #{repo_data_url}. #{e.class}: #{e.message}"
+        logger.info "Failed to fetch for #{arch} #{repo_data_url}. #{e.class}: #{e.message}"
       end
     end
-    puts "Finished in #{benchmark.real.round(1)} sec: #{packages.to_json.bytesize / 1_000_000}mb of data."
+    logger.info "Finished in #{benchmark.real.round(1)} sec: #{packages.to_json.bytesize / 1_000_000}mb of data."
     packages
   end
 

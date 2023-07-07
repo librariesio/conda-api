@@ -6,10 +6,21 @@ require_relative "app"
 require "rufus-scheduler"
 
 class CondaAPI < Sinatra::Base
-  scheduler = Rufus::Scheduler.new
+  register Sinatra::SensibleLogging
 
   configure :production, :development do
-    enable :logging
+    # use SensibleLogging for request id, request logging, and tagged logging
+    sensible_logging(
+      logger: Logger.new($stdout),
+      log_tags: [->(_req) { [Time.now] }]
+    )
+    set :log_level, Logger::INFO
+  end
+
+  configure do
+    set :dump_errors, false
+    set :raise_errors, true
+    set :show_exceptions, false
   end
 
   get "/" do
@@ -46,11 +57,5 @@ class CondaAPI < Sinatra::Base
   get "/:channel/:name/:version" do
     content_type :json
     Conda.instance.package_by_channel(params["channel"], params["name"], params["version"]).to_json
-  end
-
-  scheduler.every "15m" do
-    puts "Reloading packages..."
-    Conda.instance.reload_all
-    puts "Reload finished"
   end
 end
