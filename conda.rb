@@ -41,7 +41,7 @@ class Conda
   def all_packages
     global_packages = {}
     @channels.each_value do |channel|
-      channel.only_one_version_packages.each do |package_name, package|
+      channel.packages.each do |package_name, package|
         if global_packages.key?(package_name)
           global_packages[package_name][:versions] += package[:versions].clone
         else
