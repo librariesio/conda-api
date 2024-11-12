@@ -16,7 +16,7 @@ A small service to make it easier for [Libraries.io](https://libraries.io) to re
 ## Development
 
 ### Requirements
-* ruby 3.1.4
+* ruby 3.2.4
   * Installing via [RVM](http://rvm.io/) or [rbenv](https://github.com/rbenv/rbenv) is recommended
 * redis
 
