@@ -23,6 +23,10 @@ class Channel
     @timestamp = Time.now
   end
 
+  def name
+    @channel_name
+  end
+
   def packages
     @lock.with_read_lock { @packages }
   end

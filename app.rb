@@ -27,6 +27,24 @@ class CondaAPI < Sinatra::Base
     "Last updated at #{Conda.instance.channels.values.first.timestamp} \n"
   end
 
+  get "/healthcheck" do
+    if Conda.instance.packages.empty?
+      error(503, "Not ready yet")
+    else
+      "OK"
+    end
+  end
+
+  get "/stats.json" do
+    Conda.instance.channels.values.map do |channel|
+      {
+        name: channel.name,
+        last_updated: channel.timestamp,
+        packages: channel.packages.length,
+      }
+    end.to_json
+  end
+
   get "/packages" do
     content_type :json
     Conda.instance.packages.to_json
