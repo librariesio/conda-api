@@ -35,10 +35,6 @@ class Channel
     end
   end
 
-  def only_one_version_packages
-    @lock.with_read_lock { remove_duplicate_versions(@packages) }
-  end
-
   def logger
     Conda.instance.logger
   end
@@ -76,7 +72,7 @@ class Channel
               packages[package_name] = base_package(package_data, package_name)
             end
 
-            packages[package_name][:versions] << release_version(artifact_filename, version)
+            packages[package_name][:versions] << release_version(artifact_filename, version) unless packages[package_name][:versions].find { |v| v[:number] == version["version"] }
           end
         end
       rescue StandardError => e
@@ -109,12 +105,5 @@ class Channel
       arch: package_version["subdir"],
       channel: @channel_name,
     }
-  end
-
-  def remove_duplicate_versions(packages)
-    packages.each_value do |value|
-      value[:versions] = value[:versions].uniq { |vers| vers[:number] }
-    end
-    packages
   end
 end
